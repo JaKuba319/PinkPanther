@@ -6,4 +6,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\PinkPanther.Core\PinkPanther.Core.csproj" />
+  </ItemGroup>
+
 </Project>
