@@ -7,7 +7,7 @@
     <h1 class="display-4">Welcome</h1>
     <h2>Bellow you can find all animals in our shelter!</h2>
 
-    <table>
+    <table class="table"> 
         <thead>
             <tr>
                 <th>
@@ -35,22 +35,22 @@
             {
                 <tr>
                     <td>
-                        @Model.IndexOf(animal);
+                        @(Model.IndexOf(animal) + 1)
                     </td>
                     <td>
-                        @animal.Name;
+                        @animal.Name
                     </td>
                     <td>
-                        @animal.Type;
+                        @animal.Type
                     </td>
                     <td>
-                        @animal.Race;
+                        @animal.Race
                     </td>
                     <td>
-                        @animal.Sex ? "male" : "female";
+                        @(animal.Sex ? "male" : "female")
                     </td>
                     <td>
-                        @animal.BirthDate;
+                        @animal.BirthDate
                     </td>
                 </tr>
             }
