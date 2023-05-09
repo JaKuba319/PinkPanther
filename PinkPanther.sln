@@ -5,6 +5,10 @@ VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PinkPanther", "PinkPanther\PinkPanther.csproj", "{AFEC3ECD-FF72-4863-A48D-ABBF5EF07055}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PinkPanther.Database", "PinkPanther.Database\PinkPanther.Database.csproj", "{688BAF46-57D2-46F4-A8CE-6AB1CBF494D5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PinkPanther.Core", "PinkPanther.Core\PinkPanther.Core.csproj", "{F62B8ABD-E38D-4099-9AC8-5C33D2EFC105}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{AFEC3ECD-FF72-4863-A48D-ABBF5EF07055}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AFEC3ECD-FF72-4863-A48D-ABBF5EF07055}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AFEC3ECD-FF72-4863-A48D-ABBF5EF07055}.Release|Any CPU.Build.0 = Release|Any CPU
+		{688BAF46-57D2-46F4-A8CE-6AB1CBF494D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{688BAF46-57D2-46F4-A8CE-6AB1CBF494D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{688BAF46-57D2-46F4-A8CE-6AB1CBF494D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{688BAF46-57D2-46F4-A8CE-6AB1CBF494D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F62B8ABD-E38D-4099-9AC8-5C33D2EFC105}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F62B8ABD-E38D-4099-9AC8-5C33D2EFC105}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F62B8ABD-E38D-4099-9AC8-5C33D2EFC105}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F62B8ABD-E38D-4099-9AC8-5C33D2EFC105}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
