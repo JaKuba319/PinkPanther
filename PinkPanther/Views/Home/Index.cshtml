@@ -1,8 +1,59 @@
-﻿@{
+﻿@model List<AnimalViewModel>
+@{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
+    <h2>Bellow you can find all animals in our shelter!</h2>
 
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    #
+                </th>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Type
+                </th>
+                <th>
+                    Race
+                </th>
+                <th>
+                    Animal's sex
+                </th>
+                <th>
+                    Date of birth
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var animal in Model)
+            {
+                <tr>
+                    <td>
+                        @Model.IndexOf(animal);
+                    </td>
+                    <td>
+                        @animal.Name;
+                    </td>
+                    <td>
+                        @animal.Type;
+                    </td>
+                    <td>
+                        @animal.Race;
+                    </td>
+                    <td>
+                        @animal.Sex ? "male" : "female";
+                    </td>
+                    <td>
+                        @animal.BirthDate;
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>
