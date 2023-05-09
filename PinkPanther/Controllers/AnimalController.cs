@@ -1,13 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using PinkPanther.Models;
 
 namespace PinkPanther.Controllers
 {
     public class AnimalController : Controller
     {
         
-        public IActionResult Index()
+        public IActionResult Index(int index)
         {
-            return View();
+            var animal = TestDatabaseTODELETE.ANIMALS.ElementAt(index);
+            return View(animal);
         }
     }
 }

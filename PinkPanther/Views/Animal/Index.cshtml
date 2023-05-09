@@ -1,3 +1,25 @@
-﻿@{
+﻿@model AnimalViewModel
+
+@{
     ViewData["Title"] = "Animal Page";
 }
+<h1 class="text-center">This is @(Model.Name)'s data page!</h1>
+
+
+<div>
+    <ul>
+        <li>Name: @Model.Name</li>
+        <li>Type: @Model.Type</li>
+        <li>Race: @Model.Race</li>
+        <li>Sex: @(Model.Sex ? "male" : "female")</li>
+        <li>Date of birth: @Model.BirthDate</li>
+        <li>Is adopted? @(Model.IsAdopted ? "Yes" : "No")</li>
+    </ul>
+    <h3>Actions:</h3>
+    <ul>
+        <!--go to Atoption and put client's information-->
+        <li>Adopt</li>
+        <!--add action delete-->
+        <li>Delete</li>
+    </ul>
+</div>

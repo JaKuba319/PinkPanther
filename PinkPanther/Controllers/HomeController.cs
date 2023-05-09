@@ -10,36 +10,7 @@ namespace PinkPanther.Controllers
 
 
         // List of animals available to adopt
-        private readonly List<AnimalViewModel> Animals = new List<AnimalViewModel>()
-        {
-            new AnimalViewModel()
-            {
-                Name = "Burek",
-                Type = "Dog",
-                Race = "Akita",
-                Sex = true,
-                BirthDate = DateOnly.FromDateTime(DateTime.Now.AddYears(-8)),
-                IsAdopted = false
-            },
-            new AnimalViewModel()
-            {
-                Name = "Jazz",
-                Type = "Dog",
-                Race = "Mongrel",
-                Sex = true,
-                BirthDate = DateOnly.FromDateTime(DateTime.Now.AddYears(-3)),
-                IsAdopted = false
-            },
-            new AnimalViewModel()
-            {
-                Name = "Funny",
-                Type = "Cat",
-                Race = "Bengal cat",
-                Sex = false,
-                BirthDate = DateOnly.FromDateTime(DateTime.Now.AddYears(-6)),
-                IsAdopted = false
-            }
-        };
+        private readonly List<AnimalViewModel> _animals = TestDatabaseTODELETE.ANIMALS;
 
 
         public HomeController(ILogger<HomeController> logger)
@@ -49,7 +20,12 @@ namespace PinkPanther.Controllers
 
         public IActionResult Index()
         {
-            return View(Animals);
+            return View(_animals);
+        }
+
+        public IActionResult View(int indexOfAnimal)
+        {
+            return RedirectToAction("Index", "Animal", new { index = indexOfAnimal });
         }
 
         public IActionResult Privacy()

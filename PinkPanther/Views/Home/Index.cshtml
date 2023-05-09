@@ -28,6 +28,9 @@
                 <th>
                     Date of birth
                 </th>
+                <th>
+                    Actions
+                </th>
             </tr>
         </thead>
         <tbody>
@@ -51,6 +54,9 @@
                     </td>
                     <td>
                         @animal.BirthDate
+                    </td>
+                    <td>
+                        <a asp-controller="Home" asp-action="View" asp-route-indexOfAnimal="@Model.IndexOf(animal)">Show</a>
                     </td>
                 </tr>
             }
