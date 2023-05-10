@@ -18,19 +18,16 @@ namespace PinkPanther.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(bool adoptedOnly = false)
         {
+            if (adoptedOnly) return View(_animals.Where(animal => animal.IsAdopted).ToList());
+
             return View(_animals.Where(animal => !animal.IsAdopted).ToList());
         }
 
         public IActionResult ViewSingleAnimal(int indexOfAnimal)
         {
             return RedirectToAction("Index", "Animal", new { index = indexOfAnimal });
-        }
-
-        public IActionResult ViewAdoptedAnimals(int indexOfAnimal)
-        {
-            return View(_animals.Where(animal => animal.IsAdopted).ToList());
         }
 
 
