@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 namespace PinkPanther.Controllers
 {
@@ -6,7 +7,7 @@ namespace PinkPanther.Controllers
     {
         public IActionResult Index(int index)
         {
-            return View(index);
+            return View(TestDatabaseTODELETE.ANIMALS.Where(animal => animal.Index == index).First());
         }
     }
 }

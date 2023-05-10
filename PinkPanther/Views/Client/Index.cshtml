@@ -1,3 +1,10 @@
-﻿@{
+﻿@model ClientViewModel
+@{
     ViewData["Title"] = "Client Page";
+}
+
+single client's data and list of adopted animals
+@foreach(var animal in Model.Animals)
+{
+    <p>@animal.Name</p>
 }

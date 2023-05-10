@@ -4,9 +4,9 @@ namespace PinkPanther.Controllers
 {
     public class ClientController : Controller
     {
-        public IActionResult Index()
+        public IActionResult Index(int indexOfClient)
         {
-            return View();
+            return View(TestDatabaseTODELETE.CLIENTS.Where(client => client.Index == indexOfClient).First());
         }
     }
 }

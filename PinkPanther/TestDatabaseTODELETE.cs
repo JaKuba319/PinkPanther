@@ -14,7 +14,7 @@ namespace PinkPanther
                 Race = "Mongrel",
                 Sex = false,
                 BirthDate = DateOnly.FromDateTime(DateTime.Now.AddYears(-3)),
-                IsAdopted = false
+                IsAdopted = true
             },
             new AnimalViewModel()
             {
@@ -45,6 +45,20 @@ namespace PinkPanther
                 Sex = false,
                 BirthDate = DateOnly.FromDateTime(DateTime.Now.AddYears(-6)),
                 IsAdopted = false
+            }
+        };
+
+        public static List<ClientViewModel> CLIENTS = new()
+        {
+            new ClientViewModel()
+            {
+                Index = 0,
+                Name = "Jan",
+                LastName = "Kowalski",
+                BirthDate = DateOnly.FromDateTime(DateTime.Now.AddYears(-20)),
+                PhoneNumber = "123 456 787",
+                Sex = true,
+                Animals = ANIMALS.Where(animal => animal.IsAdopted).ToList()
             }
         };
     }

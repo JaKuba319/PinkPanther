@@ -1,0 +1,60 @@
+﻿@model List<ClientViewModel>
+@{
+    ViewData["Title"] = "Client Page";
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                #
+            </th>
+            <th>
+                Name
+            </th>
+            <th>
+                Last name
+            </th>
+            <th>
+                Phone numer
+            </th>
+            <th>
+                Sex
+            </th>
+            <th>
+                Date of birth
+            </th>
+            <th>
+                Actions
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var client in Model)
+        {
+            <tr>
+                <td>
+                    @client.Index
+                </td>
+                <td>
+                    @client.Name
+                </td>
+                <td>
+                    @client.LastName
+                </td>
+                <td>
+                    @client.PhoneNumber
+                </td>
+                <td>
+                    @(client.Sex ? "male" : "female")
+                </td>
+                <td>
+                    @client.BirthDate
+                </td>
+                <td>
+                    <a asp-controller="Client" asp-action="Index" asp-route-indexOfAnimal="@client.Index">Show</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

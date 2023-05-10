@@ -20,13 +20,19 @@ namespace PinkPanther.Controllers
 
         public IActionResult Index()
         {
-            return View(_animals);
+            return View(_animals.Where(animal => !animal.IsAdopted).ToList());
         }
 
-        public IActionResult View(int indexOfAnimal)
+        public IActionResult ViewSingleAnimal(int indexOfAnimal)
         {
             return RedirectToAction("Index", "Animal", new { index = indexOfAnimal });
         }
+
+        public IActionResult ViewAdoptedAnimals(int indexOfAnimal)
+        {
+            return View(_animals.Where(animal => animal.IsAdopted).ToList());
+        }
+
 
         public IActionResult Privacy()
         {
