@@ -6,17 +6,8 @@ namespace PinkPanther.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-
         // List of animals available to adopt
         private readonly List<AnimalViewModel> _animals = TestDatabaseTODELETE.ANIMALS;
-
-
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
 
         public IActionResult Index(bool adoptedOnly = false)
         {

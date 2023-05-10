@@ -6,7 +6,7 @@ namespace PinkPanther.Controllers
     {
         public IActionResult Index(int indexOfClient)
         {
-            return View(TestDatabaseTODELETE.CLIENTS.Where(client => client.Index == indexOfClient).First());
+            return View(TestDatabaseTODELETE.CLIENTS.Where(client => client.Index == indexOfClient).FirstOrDefault());
         }
     }
 }

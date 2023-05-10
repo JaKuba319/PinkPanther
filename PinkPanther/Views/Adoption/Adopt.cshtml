@@ -1,0 +1,114 @@
+﻿@model AdoptionViewModel
+@{
+    ViewData["Title"] = "Adoption Page";
+}
+Adoption's form data:
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Animal's data
+            </th>
+            <th>
+                Value
+            </th>
+            <th>
+                Client's data
+            </th>
+            <th>
+                Value
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                Index:
+            </td>
+            <td>
+                @Model.Animal.Index
+            </td>
+            <td>
+                Index:
+            </td>
+            <td>
+                @Model.Client.Index
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Name:
+            </td>
+            <td>
+                @Model.Animal.Name
+            </td>
+            <td>
+                First name:
+            </td>
+            <td>
+                @Model.Client.Name
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Type:
+            </td>
+            <td>
+                @Model.Animal.Type
+            </td>
+            <td>
+                Last name:
+            </td>
+            <td>
+                @Model.Client.LastName
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Race:
+            </td>
+            <td>
+                @Model.Animal.Race
+            </td>
+            <td>
+                Phone number:
+            </td>
+            <td>
+                @Model.Client.PhoneNumber
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Sex:
+            </td>
+            <td>
+                @(Model.Animal.Sex ? "male" : "female")
+            </td>
+            <td>
+                Sex:
+            </td>
+            <td>
+                @(Model.Client.Sex ? "male" : "female")
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Date of birth:
+            </td>
+            <td>
+                @Model.Animal.BirthDate
+            </td>
+            <td>
+                Date of birth:
+            </td>
+            <td>
+                @Model.Client.BirthDate
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<form asp-controller="Adoption" asp-action="AdoptSend">
+    <button type="submit" class="btn">Add adoption to database</button>
+</form>
