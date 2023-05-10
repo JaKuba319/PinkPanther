@@ -4,9 +4,9 @@ namespace PinkPanther.Controllers
 {
     public class AdoptionController : Controller
     {
-        public IActionResult Index()
+        public IActionResult Index(int index)
         {
-            return View();
+            return View(index);
         }
     }
 }

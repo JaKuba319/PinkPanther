@@ -5,11 +5,18 @@ namespace PinkPanther.Controllers
 {
     public class AnimalController : Controller
     {
-        
         public IActionResult Index(int index)
         {
-            var animal = TestDatabaseTODELETE.ANIMALS.ElementAt(index);
+            var animal = TestDatabaseTODELETE.ANIMALS.Where(animal => animal.Index == index).First();
             return View(animal);
+        }
+        public IActionResult Adopt(int index)
+        {
+            return RedirectToAction("Index", "Adoption", new { index });
+        }
+        public IActionResult Delete()
+        {
+            return View();
         }
     }
 }

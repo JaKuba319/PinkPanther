@@ -38,7 +38,7 @@
             {
                 <tr>
                     <td>
-                        @(Model.IndexOf(animal) + 1)
+                        @animal.Index
                     </td>
                     <td>
                         @animal.Name
@@ -56,7 +56,7 @@
                         @animal.BirthDate
                     </td>
                     <td>
-                        <a asp-controller="Home" asp-action="View" asp-route-indexOfAnimal="@Model.IndexOf(animal)">Show</a>
+                        <a asp-controller="Home" asp-action="View" asp-route-indexOfAnimal="@animal.Index">Show</a>
                     </td>
                 </tr>
             }
