@@ -12,7 +12,7 @@ namespace PinkPanther.Controllers
         }
         public IActionResult Adopt(int index)
         {
-            return RedirectToAction("Index", "Adoption", new { index });
+            return RedirectToAction("Index", "Adoption", new { index }); // to change
         }
         public IActionResult Delete()
         {

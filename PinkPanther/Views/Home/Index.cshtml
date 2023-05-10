@@ -1,6 +1,6 @@
 ﻿@model List<AnimalViewModel>
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Animals Page";
 }
 
 <div class="text-center">
@@ -29,6 +29,9 @@
                     Date of birth
                 </th>
                 <th>
+                    Is adopted?
+                </th>
+                <th>
                     Actions
                 </th>
             </tr>
@@ -54,6 +57,9 @@
                     </td>
                     <td>
                         @animal.BirthDate
+                    </td>
+                    <td>
+                        @animal.IsAdopted
                     </td>
                     <td>
                         <a asp-controller="Animal" asp-action="Index" asp-route-index="@animal.Index">Show</a>
