@@ -10,10 +10,14 @@ namespace PinkPanther.Controllers
             var animal = TestDatabaseTODELETE.ANIMALS.Where(animal => animal.Index == index).First();
             return View(animal);
         }
+
+        /*
+        // idk if i should use it like that
         public IActionResult Adopt(int index)
         {
             return RedirectToAction("Index", "Adoption", new { index }); // to change
         }
+        */
         public IActionResult Delete()
         {
             return View();

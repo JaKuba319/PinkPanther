@@ -59,6 +59,16 @@ namespace PinkPanther
                 PhoneNumber = "123 456 787",
                 Sex = true,
                 Animals = ANIMALS.Where(animal => animal.IsAdopted).ToList()
+            },
+            new ClientViewModel()
+            {
+                Index = 1,
+                Name = "Kuba",
+                LastName = "Piotrkowski",
+                BirthDate = DateOnly.FromDateTime(DateTime.Now.AddYears(-19)),
+                PhoneNumber = "122 456 787",
+                Sex = true,
+                Animals = null
             }
         };
     }

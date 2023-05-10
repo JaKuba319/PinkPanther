@@ -1,6 +1,48 @@
-﻿@model AnimalViewModel
+﻿@model AdoptionDataViewModel
 @{
     ViewData["Title"] = "Adoption Page";
 }
 
-Space for adoption form
+<form asp-controller="Adoption" asp-action="Adopt">
+    <h2>
+        Select animal to adopt:
+    </h2>
+
+    <fieldset>
+        <select id="animalIndex" name="animalIndex" class="form-select form-select-sm">
+        @foreach (var animal in Model.Animals)
+        {
+            @if (Model.SelectedAnimal != null && animal.Index == Model.SelectedAnimal.Index)
+            {
+                <option selected value="@animal.Index">
+                    @animal.Index | @animal.Name
+                </option>
+            }
+            else
+            {
+                <option value="@animal.Index">
+                    @animal.Index | @animal.Name
+                </option>
+            }
+        }
+        </select> 
+    </fieldset>
+
+    <h2 class="mt-3">
+        Select client:
+    </h2>
+
+    <fieldset>
+        <select id="clientIndex" name="clientIndex" class="form-select form-select-sm">
+        @foreach (var client in Model.Clients)
+        {
+            <option value="@client.Index">
+                @client.Index | @client.Name @client.LastName
+            </option>
+            }
+        }
+        </select>
+    </fieldset>
+
+    <button type="submit" class="btn">Send</button>
+</form>

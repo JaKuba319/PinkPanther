@@ -20,7 +20,7 @@
         @if(!Model.IsAdopted)
         {
         <li>
-            <a asp-controller="Animal" asp-action="Adopt" asp-route-index="@Model.Index">Adopt</a>
+            <a asp-controller="Adoption" asp-action="Index" asp-route-index="@Model.Index">Adopt</a>
         </li>
         }
         <li>

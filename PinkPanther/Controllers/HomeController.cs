@@ -22,7 +22,7 @@ namespace PinkPanther.Controllers
         {
             if (adoptedOnly) return View(_animals.Where(animal => animal.IsAdopted).ToList());
 
-            return View(_animals.Where(animal => !animal.IsAdopted).ToList());
+            return View(_animals);
         }
 
         public IActionResult ViewSingleAnimal(int indexOfAnimal)
