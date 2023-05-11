@@ -2,7 +2,7 @@
 
 namespace PinkPanther.Controllers
 {
-    public class RaceController1 : Controller
+    public class RaceController : Controller
     {
         public IActionResult Index()
         {

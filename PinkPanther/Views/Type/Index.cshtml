@@ -1,4 +1,22 @@
-﻿@{
+﻿@model List<string>
+@{
     ViewData["Title"] = "Type Page";
 }
 Add modify and delete types of animals
+
+<form class="form-group mb-3">
+    <h1>Add new type of animal:</h1>
+    <label for="typeName">Input type:</label>
+    <input type="text" id="typeName" name="typeName" class="form-control mb-3" />
+    
+    <button type="submit" class="btn btn-outline-secondary">Add!</button>
+</form>
+
+
+<h1>Available types:</h1>
+<ul class="list-group">
+@foreach(var type in Model)
+{
+        <li class="list-group-item">@type</li>
+}
+</ul>
