@@ -5,7 +5,10 @@
 
 single client's data and list of adopted animals
 
-@foreach(var animal in Model.Animals)
+@if(Model.Animals != null)
 {
-    <p>@animal.Name</p>
+    @foreach (var animal in Model.Animals)
+    {
+        <p>@animal.Name</p>
+    }
 }

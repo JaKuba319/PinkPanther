@@ -4,21 +4,56 @@
 }
 
 <h1 class="display-4">Welcome</h1>
-<h2>Bellow you can find all animals in our shelter!</h2>
-<form>
-<div class="form-group">
-    <label for="filterString">Filter:</label>
-    <input type="text" id="filterString" placeholder="burek..." class="form-control" /> <br />
-</div>
-<div class="form-group">
-    <label for="type">Type:</label>
+
+<form class="form-group mb-5">
+    <h1>
+        Add new animal to database:
+    </h1>
+    <label for="animalName">Input animal's name (if it does not have one then do not input anything):</label>
+    <input type="text" id="animalName" name="animalName" class="form-control" />
+
+    <label for="type">Input animal's type:</label>
     <select id="type" name="type" class="form-select form-select-sm">
-        <option>Type 1</option>
-        <option>Type 2</option>
-    </select> <br />
-</div>
+        <option value="">Type 1</option>
+    </select>
+
+    <label for="race">Input animal's race:</label>
+    <select id="race" name="race" class="form-select form-select-sm">
+        <option value="">Race 1</option>
+    </select>
+
+    <label for="animalBirthDate">Input animal's date of birth:</label>
+    <input type="date" id="animalBirthDate" name="animalBirthDate" class="form-control" />
+
+    <label for="animalGender">Input animal's gender:</label>
+    <select id="animalGender" name="animalGender" class="form-select form-select-sm">
+        <option value="1">Male</option>
+        <option value="0">Female</option>
+    </select>
+
+    <button type="submit" class="btn btn-outline-secondary">Add new animal!</button>
+</form>
+
+
+<h2>Bellow you can find all animals in our shelter!</h2>
+
+<form>
+    <div class="form-group">
+        <label for="filterString">Filter:</label>
+        <input type="text" id="filterString" placeholder="burek..." class="form-control" /> <br />
+    </div>
+    <div class="form-group">
+        <label for="type">Type:</label>
+        <select id="type" name="type" class="form-select form-select-sm">
+            <option>Type 1</option>
+            <option>Type 2</option>
+        </select> <br />
+    </div>
     <button type="submit" class="btn btn-outline-secondary">Search</button><br />
 </form>
+
+<h2>Available clients in database:</h2>
+
 <table class="table"> 
     <thead>
         <tr>

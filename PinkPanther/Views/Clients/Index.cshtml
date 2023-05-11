@@ -3,21 +3,21 @@
     ViewData["Title"] = "Client Page";
 }
 
-<form class="form-group">
+<form class="form-group mb-5">
     <h1>
         Add new client to database:
     </h1>
-    <label for="name">Input client's first name:</label>
-    <input type="text" id="name" name="name" class="form-control" />
+    <label for="clientName">Input client's first name:</label>
+    <input type="text" id="clientName" name="clientName" class="form-control" />
 
     <label for="lastName">Input client's last name:</label>
     <input type="text" id="lastName" name="lastName" class="form-control" />
 
-    <label for="birth">Input client's date of birth:</label>
-    <input type="date" id="birth" name="birth" class="form-control" />
+    <label for="clientBirthDate">Input client's date of birth:</label>
+    <input type="date" id="clientBirthDate" name="clientBirthDate" class="form-control" />
 
-    <label for="sex">Input client's gender:</label>
-    <select title="You can't be battle droid! Roger Roger" id="sex" name="sex" class="form-select form-select-sm">
+    <label for="clientGender">Input client's gender:</label>
+    <select title="You can't be battle droid! Roger Roger" id="clientGender" name="clientGender" class="form-select form-select-sm">
         <option value="1">Male</option>
         <option value="0">Female</option>
         <option value="-1" disabled>Battle droid</option>
@@ -26,8 +26,10 @@
     <label for="phoneNumber">Input client's phone numer:</label>
     <input type="text" id="phoneNumber" name="phoneNumber" class="form-control" />
 
-    
+<button type="submit" class="btn btn-outline-secondary">Add new client!</button>
 </form>
+
+<h2>Available clients in database:</h2>
 
 <table class="table">
     <thead>
@@ -78,7 +80,7 @@
                     @client.BirthDate
                 </td>
                 <td>
-                    <a asp-controller="Client" asp-action="Index" asp-route-indexOfAnimal="@client.Index">Show</a>
+                    <a asp-controller="Client" asp-action="Index" asp-route-indexOfClient="@client.Index">Show</a>
                 </td>
             </tr>
         }
