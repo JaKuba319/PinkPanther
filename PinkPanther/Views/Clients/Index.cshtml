@@ -1,4 +1,4 @@
-﻿@model List<ClientViewModel>
+﻿@model IEnumerable<ClientViewModel>
 @{
     ViewData["Title"] = "Client Page";
 }
@@ -34,6 +34,12 @@
     <div class="form-group">
         <label for="filterString">Filter:</label>
         <input type="text" id="filterString" name="filterString" class="form-control" /> <br />
+        Gender:
+        <select id="genderFilter" name="genderFilter" class="form-select form-select-sm">
+            <option value="">Any</option>
+            <option value="1">Male</option>
+            <option value="0">Female</option>
+        </select>
     </div>
     <button type="submit" class="btn btn-outline-secondary mb-3">Search</button><br />
 </form>
