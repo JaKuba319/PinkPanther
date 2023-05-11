@@ -9,11 +9,38 @@ namespace PinkPanther.Controllers
         // List of animals available to adopt
         private readonly List<AnimalViewModel> _animals = TestDatabaseTODELETE.ANIMALS;
 
-        public IActionResult Index(bool adoptedOnly = false)
+        public IActionResult Index(string filterstring, string type, bool adoptedOnly = false)
         {
-            if (adoptedOnly) return View(_animals.Where(animal => animal.IsAdopted).ToList());
+            var model = new AnimalsAndTypesViewModel();
+            var animals = _animals;
+            if(string.IsNullOrEmpty(filterstring) && string.IsNullOrEmpty(type))
+            {
+                model.Animals = animals.Where(animal => animal.IsAdopted == adoptedOnly || !adoptedOnly);
+                model.Types = _animals.Select(animal => animal.Type).Distinct();
 
-            return View(_animals);
+                return View(model);
+            }
+
+            if(string.IsNullOrEmpty(filterstring))
+            {
+                animals = animals.Where(animal => animal.Type == type).ToList(); 
+            }
+            else if (string.IsNullOrEmpty(type))
+            {
+                filterstring = filterstring.Trim().ToLower();
+                animals = animals.Where(animal => animal.Name.ToLower().Contains(filterstring) ).ToList();
+            }
+            else
+            {
+                filterstring = filterstring.Trim().ToLower();
+                animals = animals.Where(animal => animal.Type == type).ToList();
+                animals = animals.Where(animal => animal.Name.ToLower().Contains(filterstring)).ToList();
+            }
+
+            model.Animals = animals;
+            model.Types = _animals.Select(animal => animal.Type).Distinct();
+
+            return View(model);
         }
 
         public IActionResult ViewSingleAnimal(int indexOfAnimal)

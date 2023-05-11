@@ -30,10 +30,10 @@
 </form>
 
 <h2>Fileter your search</h2>
-<form>
+<form asp-controller="Clients" asp-action="Index">
     <div class="form-group">
         <label for="filterString">Filter:</label>
-        <input type="text" id="filterString" class="form-control" /> <br />
+        <input type="text" id="filterString" name="filterString" class="form-control" /> <br />
     </div>
     <button type="submit" class="btn btn-outline-secondary mb-3">Search</button><br />
 </form>
