@@ -1,4 +1,21 @@
-﻿@{
+﻿@model List<string>
+@{
     ViewData["Title"] = "Race Page";
 }
-Add, modify and delete races. Thats how to fix racism XD
+
+<form class="form-group mb-3">
+    <h1>Add new race of animal:</h1>
+    <label for="raceName">Input race:</label>
+    <input type="text" id="raceName" name="raceName" class="form-control mb-3" />
+
+    <button type="submit" class="btn btn-outline-secondary">Add!</button>
+</form>
+
+
+<h1>Available races:</h1>
+<ul class="list-group">
+    @foreach (var race in Model)
+    {
+        <li class="list-group-item">@race</li>
+    }
+</ul>
