@@ -19,9 +19,11 @@ namespace PinkPanther.Controllers
             return RedirectToAction("Index", "Adoption", new { index }); // to change
         }
         */
-        public IActionResult Delete()
+        public IActionResult Delete(int index)
         {
-            return View();
+            var toDelete = TestDatabaseTODELETE.ANIMALS.Where(animal => animal.Index == index).First();
+            TestDatabaseTODELETE.ANIMALS.Remove(toDelete);
+            return RedirectToAction("Index", "Home");
         }
     }
 }
