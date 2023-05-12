@@ -5,9 +5,27 @@
 
 
 <h1>
-    Modify @Model.Index client's data:
+    Modify #@Model.Index client's data:
 </h1>
 
-<form>
-    <!--modify form-->
+<form asp-controller="Client" asp-action="Change" asp-route-index="@Model.Index" class="form-group mb-5">
+    <label for="firstName">Input new first name:</label>
+    <input type="text" id="firstName" name="firstName" class="form-control" />
+
+    <label for="lastName">Input new last name:</label>
+    <input type="text" id="lastName" name="lastName" class="form-control" />
+
+    <label for="birthDate">Input new date of birth:</label>
+    <input type="date" id="birthDate" name="birthDate" class="form-control" />
+
+    <label for="gender">Input new gender:</label>
+    <select id="gender" name="gender" class="form-select form-select-sm">
+        <option value="1">Male</option>
+        <option value="0">Female</option>
+    </select>
+
+    <label for="phoneNumber">Input new phone numer:</label>
+    <input type="text" id="phoneNumber" name="phoneNumber" class="form-control" />
+
+<button type="submit" class="btn btn-outline-secondary mt-3">Modify client!</button>
 </form>

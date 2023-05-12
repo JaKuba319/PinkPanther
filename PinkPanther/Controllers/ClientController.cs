@@ -31,6 +31,8 @@ namespace PinkPanther.Controllers
         public IActionResult Change(int index, string firstName, string lastName, string gender, string birthDate, string phoneNumber)
         {
             // add validation
+            var oldClient = TestDatabaseTODELETE.CLIENTS.Where(client => client.Index == index).FirstOrDefault();
+            if (oldClient == null) return RedirectToAction("Index", "Clients");
 
             var client = new ClientViewModel()
             {
@@ -40,10 +42,11 @@ namespace PinkPanther.Controllers
                 PhoneNumber = phoneNumber,
                 Sex = gender == "1",
                 BirthDate = DateOnly.Parse(birthDate),
+                Animals = oldClient.Animals
             };
 
             TestDatabaseTODELETE.CLIENTS[index] = client;
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Clients");
         }
 
     }
