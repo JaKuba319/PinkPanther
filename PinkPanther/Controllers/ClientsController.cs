@@ -45,5 +45,11 @@ namespace PinkPanther.Controllers
             
             return View(clients);
         }
+
+        public IActionResult Add(string clientName, string lastName, string clientBirthDate, string phoneNumber, string clientGender)
+        {
+
+            return RedirectToAction("Index", "Clients");
+        }
     }
 }

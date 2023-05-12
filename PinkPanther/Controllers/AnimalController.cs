@@ -7,7 +7,8 @@ namespace PinkPanther.Controllers
     {
         public IActionResult Index(int index)
         {
-            var animal = TestDatabaseTODELETE.ANIMALS.Where(animal => animal.Index == index).First();
+            var animal = TestDatabaseTODELETE.ANIMALS.Where(animal => animal.Index == index).FirstOrDefault();
+            if (animal == null) return RedirectToAction("Index", "Home");
             return View(animal);
         }
 

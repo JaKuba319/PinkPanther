@@ -15,9 +15,13 @@ namespace PinkPanther.Controllers
         }
         public IActionResult Modify(int index)
         {
-            var race = _races.Where(race => race.Index == index).First();
-            _index = index;
-            return View(race);
+            var race = _races.Where(race => race.Index == index).FirstOrDefault();
+            if (race != null)
+            {
+                _index = index;
+                return View(race);
+            }
+            return RedirectToAction("Index", "Race");
         }
 
         public IActionResult ChangeType(string race)
