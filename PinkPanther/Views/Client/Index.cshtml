@@ -54,3 +54,13 @@
     }
 
 </ul>
+
+<h3>Other actions:</h3>
+<ul class="list-group">
+    <li class="list-group-item">
+        <a asp-controller="Client" asp-action="Modify" asp-route-index="@Model.Index">Modify</a>
+    </li>
+    <li class="list-group-item">
+        <a asp-controller="Client" asp-action="Delete" asp-route-index="@Model.Index">Delete</a>
+    </li>
+</ul>

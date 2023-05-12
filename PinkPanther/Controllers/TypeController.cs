@@ -9,7 +9,6 @@ namespace PinkPanther.Controllers
     public class TypeController : Controller
     {
         private readonly List<TypeViewModel> _types = TestDatabaseTODELETE.TYPES;
-        private int _index;
         public IActionResult Index()
         {
             return View(_types); 
@@ -19,17 +18,16 @@ namespace PinkPanther.Controllers
             var type = _types.Where(type => type.Index == index).FirstOrDefault();
             if(type != null)
             {
-                _index = index;
                 return View(type);
             }
             return RedirectToAction("Index", "Type");
         }
-        public IActionResult ChangeType(string type)
+        public IActionResult ChangeType(int index, string type)
         {
             //send changes to database
-            var typevm = new TypeViewModel() { Index = _index, Type = type };
+            var typevm = new TypeViewModel() { Index = index, Type = type };
 
-            TestDatabaseTODELETE.TYPES[_index] = typevm;
+            TestDatabaseTODELETE.TYPES[index] = typevm;
 
 
             return RedirectToAction("Index", "Type");

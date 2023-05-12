@@ -8,7 +8,6 @@ namespace PinkPanther.Controllers
     {
         private readonly List<RaceViewModel> _races = TestDatabaseTODELETE.RACES;
 
-        private int _index;
         public IActionResult Index()
         {
             return View(_races);
@@ -18,19 +17,20 @@ namespace PinkPanther.Controllers
             var race = _races.Where(race => race.Index == index).FirstOrDefault();
             if (race != null)
             {
-                _index = index;
                 return View(race);
             }
             return RedirectToAction("Index", "Race");
         }
 
-        public IActionResult ChangeType(string race)
+        public IActionResult ChangeType(int index, string race)
         {
             //send changes to database
-            var racevm = new RaceViewModel() { Index = _index, Race = race };
+            if (!string.IsNullOrEmpty(race))
+            {
+                var racevm = new RaceViewModel() { Index = index, Race = race };
 
-            TestDatabaseTODELETE.RACES[_index] = racevm;
-
+                TestDatabaseTODELETE.RACES[index] = racevm;
+            }
 
             return RedirectToAction("Index", "Race");
         }

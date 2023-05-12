@@ -1,10 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PinkPanther.Models;
+using System.Diagnostics;
+using System.Reflection;
+using System.Xml.Linq;
 
 namespace PinkPanther.Controllers
 {
     public class AnimalController : Controller
     {
+
         public IActionResult Index(int index)
         {
             var animal = TestDatabaseTODELETE.ANIMALS.Where(animal => animal.Index == index).FirstOrDefault();
@@ -21,10 +25,35 @@ namespace PinkPanther.Controllers
         */
         public IActionResult Delete(int index)
         {
-            var toDelete = TestDatabaseTODELETE.ANIMALS.Where(animal => animal.Index == index).FirstOrDefault();
-            if(toDelete == null) return RedirectToAction("Index", "Home");
-            TestDatabaseTODELETE.ANIMALS.Remove(toDelete);
+            var animal = TestDatabaseTODELETE.ANIMALS.Where(animal => animal.Index == index).FirstOrDefault();
+            if (animal == null) return RedirectToAction("Index", "Home");
+            TestDatabaseTODELETE.ANIMALS.Remove(animal);
             return RedirectToAction("Index", "Home");
         }
+
+        public IActionResult Modify(int index)
+        {
+            var animal = TestDatabaseTODELETE.ANIMALS.Where(animal => animal.Index == index).FirstOrDefault();
+            if (animal == null) return RedirectToAction("Index", "Home");
+            return View(animal);
+        }
+
+        public IActionResult Change(int index, string name, string gender, string birthDate, string race, string type)
+        {
+            // add validation 
+
+            var animal = new AnimalViewModel()
+            {
+                Index = index,
+                BirthDate = DateOnly.Parse(birthDate),
+                Name = name,
+                Sex = gender == "1",
+                Type = type,
+                Race = race
+            };
+            TestDatabaseTODELETE.ANIMALS[index] = animal;
+            return RedirectToAction("Index", "Home");
+        }
+
     }
 }

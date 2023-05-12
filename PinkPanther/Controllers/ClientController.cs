@@ -1,14 +1,50 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using PinkPanther.Models;
+using System;
+using System.Diagnostics;
 
 namespace PinkPanther.Controllers
 {
     public class ClientController : Controller
     {
-        public IActionResult Index(int indexOfClient)
+        public IActionResult Index(int index)
         {
-            var clientvm = TestDatabaseTODELETE.CLIENTS.Where(client => client.Index == indexOfClient).FirstOrDefault();
-            if(clientvm == null) return RedirectToAction("Index","Clients");
-            return View(clientvm);
+            var client = TestDatabaseTODELETE.CLIENTS.Where(client => client.Index == index).FirstOrDefault();
+            if(client == null) return RedirectToAction("Index","Clients");
+            return View(client);
         }
+
+        public IActionResult Delete(int index)
+        {
+            var client = TestDatabaseTODELETE.CLIENTS.Where(client => client.Index == index).FirstOrDefault();
+            if (client == null) return RedirectToAction("Index", "Clients");
+            TestDatabaseTODELETE.CLIENTS.Remove(client);
+            return RedirectToAction("Index", "Clients");
+        }
+
+        public IActionResult Modify(int index)
+        {
+            var client = TestDatabaseTODELETE.CLIENTS.Where(client => client.Index == index).FirstOrDefault();
+            if (client == null) return RedirectToAction("Index", "Clients");
+            return View(client);
+        }
+        public IActionResult Change(int index, string firstName, string lastName, string gender, string birthDate, string phoneNumber)
+        {
+            // add validation
+
+            var client = new ClientViewModel()
+            {
+                Index = index,
+                Name = firstName,
+                LastName = lastName,
+                PhoneNumber = phoneNumber,
+                Sex = gender == "1",
+                BirthDate = DateOnly.Parse(birthDate),
+            };
+
+            TestDatabaseTODELETE.CLIENTS[index] = client;
+            return RedirectToAction("Index", "Home");
+        }
+
     }
 }

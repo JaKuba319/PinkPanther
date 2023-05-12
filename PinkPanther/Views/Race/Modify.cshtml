@@ -10,7 +10,7 @@
 <br />
 @Model.Race
 
-<form asp-action="ChangeType" asp-controller="Race">
+<form asp-action="ChangeType" asp-controller="Race" asp-route-index="@Model.Index">
     <label for="race">
         Input new race:
     </label>

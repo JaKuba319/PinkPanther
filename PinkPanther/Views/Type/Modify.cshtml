@@ -9,7 +9,7 @@ Type modify
 <br />
 @Model.Type
 
-<form asp-action="ChangeType" asp-controller="Type">
+<form asp-action="ChangeType" asp-controller="Type" asp-route-index="@Model.Index">
     <label for="type">
         Input new type:
     </label>
