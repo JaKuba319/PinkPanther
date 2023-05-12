@@ -6,3 +6,35 @@
 <h1>
     Modify #@Model.Index @Model.Name's data
 </h1>
+
+<form asp-controller="Animal" asp-action="Change" asp-route-index="@Model.Index" class="form-group mb-5">
+    <label for="name">Input new name:</label>
+    <input type="text" id="name" name="name" class="form-control" />
+
+    <label for="type">Input new type:</label>
+    <select id="type" name="type" class="form-select form-select-sm">
+        <option value="type 1">Type 1</option>
+    </select>
+
+    <label for="race">Input new race:</label>
+    <select id="race" name="race" class="form-select form-select-sm">
+        <option value="race 1">Race 1</option>
+    </select>
+
+    <label for="birthDate">Input new date of birth:</label>
+    <input type="date" id="birthDate" name="birthDate" class="form-control" />
+
+    <label for="gender">Input new gender:</label>
+    <select id="gender" name="gender" class="form-select form-select-sm mb-3">
+        <option value="1">Male</option>
+        <option value="0">Female</option>
+    </select>
+
+    <label for="adopted">Change to not adopted:</label>
+    <select id="adopted" name="adopted" class="form-select form-select-sm mb-3">
+        <option value="1">Do not change</option>
+        <option value="0">Change</option>
+    </select>
+
+    <button type="submit" class="btn btn-outline-secondary">Add new animal!</button>
+</form>

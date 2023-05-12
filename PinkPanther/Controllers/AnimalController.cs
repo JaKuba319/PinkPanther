@@ -38,9 +38,11 @@ namespace PinkPanther.Controllers
             return View(animal);
         }
 
-        public IActionResult Change(int index, string name, string gender, string birthDate, string race, string type)
+        public IActionResult Change(int index, string name, string gender, string birthDate, string race, string type, string adopted)
         {
             // add validation 
+            var oldAnimal = TestDatabaseTODELETE.ANIMALS.Where(animal => animal.Index == index).FirstOrDefault();
+            if (oldAnimal == null) return RedirectToAction("Index", "Home");
 
             var animal = new AnimalViewModel()
             {
@@ -49,8 +51,18 @@ namespace PinkPanther.Controllers
                 Name = name,
                 Sex = gender == "1",
                 Type = type,
-                Race = race
+                Race = race,
             };
+
+            if (adopted == "1")
+            {
+                animal.IsAdopted = oldAnimal.IsAdopted;
+            }
+            else
+            {
+                animal.IsAdopted = false;
+            }
+            
             TestDatabaseTODELETE.ANIMALS[index] = animal;
             return RedirectToAction("Index", "Home");
         }
