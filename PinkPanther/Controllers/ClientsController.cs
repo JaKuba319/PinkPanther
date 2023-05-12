@@ -48,6 +48,8 @@ namespace PinkPanther.Controllers
 
         public IActionResult Add(string clientName, string lastName, string clientBirthDate, string phoneNumber, string clientGender)
         {
+            // add validation 
+
             var client = new ClientViewModel()
             {
                 Name = clientName,

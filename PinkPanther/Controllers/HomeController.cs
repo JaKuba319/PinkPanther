@@ -48,6 +48,25 @@ namespace PinkPanther.Controllers
             return RedirectToAction("Index", "Animal", new { index = indexOfAnimal });
         }
 
+        public IActionResult Add(string animalName, string race, string type, string animalGender, string animalBirthDate)
+        {
+            // add validation 
+
+            var animal = new AnimalViewModel()
+            { 
+                Index = TestDatabaseTODELETE.ANIMALS.Last().Index + 1,
+                Name = animalName,
+                Race = race,
+                Type = type,
+                BirthDate = DateOnly.Parse(animalBirthDate),
+                Sex = animalGender == "1"
+            };
+
+            TestDatabaseTODELETE.ANIMALS.Add(animal);
+            
+            return RedirectToAction("Index", "Home");
+        }
+
 
         public IActionResult Privacy()
         {

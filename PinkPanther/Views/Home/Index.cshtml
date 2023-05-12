@@ -5,7 +5,7 @@
 
 <h1 class="display-4">Welcome</h1>
 
-<form class="form-group mb-5">
+<form asp-controller="Home" asp-action="Add" class="form-group mb-5">
     <h1>
         Add new animal to database:
     </h1>
@@ -14,12 +14,12 @@
 
     <label for="type">Input animal's type:</label>
     <select id="type" name="type" class="form-select form-select-sm">
-        <option value="">Type 1</option>
+        <option value="type 1">Type 1</option>
     </select>
 
     <label for="race">Input animal's race:</label>
     <select id="race" name="race" class="form-select form-select-sm">
-        <option value="">Race 1</option>
+        <option value="race 1">Race 1</option>
     </select>
 
     <label for="animalBirthDate">Input animal's date of birth:</label>
