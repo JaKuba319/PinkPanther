@@ -1,0 +1,18 @@
+﻿@model TypeViewModel
+@{
+    ViewData["Title"] = "Type Page";
+}
+
+Type modify
+
+@Model.Index
+<br />
+@Model.Type
+
+<form asp-action="ChangeType" asp-controller="Type">
+    <label for="type">
+        Input new type:
+    </label>
+    <input type="text" name="type" id="type" />
+    <button type="submit" class="btn btn-outline-secondary"> Send </button>
+</form>

@@ -1,8 +1,8 @@
 ﻿namespace PinkPanther.Models
 {
-    public class TypeViewModel
+    public class RaceViewModel
     {
         public int Index { get; set; }  
-        public string Type { get; set; }
+        public string Race { get; set; }
     }
 }

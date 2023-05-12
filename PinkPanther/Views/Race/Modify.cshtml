@@ -1,0 +1,19 @@
+﻿@model RaceViewModel
+@{
+    ViewData["Title"] = "Race Page";
+}
+<h1>
+    Race modify
+</h1>
+
+@Model.Index 
+<br />
+@Model.Race
+
+<form asp-action="ChangeType" asp-controller="Race">
+    <label for="race">
+        Input new race:
+    </label>
+    <input type="text" name="race" id="race"/>
+    <button type="submit" class="btn btn-outline-secondary"> Send </button>
+</form>

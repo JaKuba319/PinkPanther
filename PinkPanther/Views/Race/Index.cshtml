@@ -1,4 +1,4 @@
-﻿@model List<string>
+﻿@model List<RaceViewModel>
 @{
     ViewData["Title"] = "Race Page";
 }
@@ -17,8 +17,10 @@
     @foreach (var race in Model)
     {
         <li class="list-group-item">
-            @race
-            <button class="btn btn-sm btn-outline-success">Modify</button>
+            @race.Index | @race.Race
+            <a asp-controller="Race" asp-action="Modify" asp-route-index="@race.Index" class="btn btn-sm btn-outline-success">
+                Modify
+            </a>
             <button class="btn btn-sm btn-outline-danger">Delete</button>
         </li>
     }
