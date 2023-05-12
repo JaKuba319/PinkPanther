@@ -3,12 +3,54 @@
     ViewData["Title"] = "Client Page";
 }
 
-single client's data and list of adopted animals
 
-@if(Model.Animals != null)
-{
-    @foreach (var animal in Model.Animals)
+<h1>
+    Client's data:
+</h1>
+
+<ul class="list-group">
+    <li class="list-group-item">
+        Index: @Model.Index
+    </li>
+    <li class="list-group-item">
+        First name: @Model.Name
+    </li>
+    <li class="list-group-item">
+        Last name: @Model.LastName
+    </li>
+    <li class="list-group-item">
+        Gender: @Model.Sex
+    </li>
+    <li class="list-group-item">
+        Phone number: @Model.PhoneNumber
+    </li>
+    <li class="list-group-item">
+        Date of birth: @Model.BirthDate
+    </li>
+    <li class="list-group-item">
+        Adopted animals: 
+        @if(Model.Animals != null) 
+        {
+            <span>@Model.Animals.Count</span>
+        } 
+        else 
+        { 
+            <span>0</span> 
+        }
+    </li>
+</ul>
+
+
+<h2>
+    Animals adopted by this client:
+</h2>
+<ul class="list-group">
+    @if (Model.Animals != null)
     {
-        <p>@animal.Name</p>
+        @foreach (var animal in Model.Animals)
+        {
+            <li class="list-group-item">@animal.Name</li>
+        }
     }
-}
+
+</ul>
