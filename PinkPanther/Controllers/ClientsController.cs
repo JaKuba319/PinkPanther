@@ -48,7 +48,17 @@ namespace PinkPanther.Controllers
 
         public IActionResult Add(string clientName, string lastName, string clientBirthDate, string phoneNumber, string clientGender)
         {
+            var client = new ClientViewModel()
+            {
+                Name = clientName,
+                LastName = lastName,
+                PhoneNumber = phoneNumber,
+                Sex = clientGender == "1",
+                BirthDate = DateOnly.Parse(clientBirthDate),
+                Index = TestDatabaseTODELETE.CLIENTS.Last().Index + 1
+            };
 
+            TestDatabaseTODELETE.CLIENTS.Add(client);
             return RedirectToAction("Index", "Clients");
         }
     }

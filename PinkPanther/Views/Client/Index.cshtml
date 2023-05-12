@@ -19,7 +19,7 @@
         Last name: @Model.LastName
     </li>
     <li class="list-group-item">
-        Gender: @Model.Sex
+        Gender: @(Model.Sex ? "Male" : "Female")
     </li>
     <li class="list-group-item">
         Phone number: @Model.PhoneNumber
