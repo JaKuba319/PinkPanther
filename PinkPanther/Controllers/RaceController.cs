@@ -34,5 +34,13 @@ namespace PinkPanther.Controllers
 
             return RedirectToAction("Index", "Race");
         }
+
+        public IActionResult Delete(int index)
+        {
+            var toDelete = TestDatabaseTODELETE.RACES.Where(race => race.Index == index).FirstOrDefault();
+            if (toDelete == null) return RedirectToAction("Index", "Race");
+            TestDatabaseTODELETE.RACES.Remove(toDelete);
+            return RedirectToAction("Index", "Race");
+        }
     }
 }

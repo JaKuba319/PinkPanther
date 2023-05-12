@@ -21,7 +21,9 @@
             <a asp-controller="Type" asp-action="Modify" asp-route-index="@type.Index" class="btn btn-sm btn-outline-success">
                 Modify
             </a>
-            <button class="btn btn-sm btn-outline-danger">Delete</button>
+            <a asp-controller="Type" asp-action="Delete" asp-route-index="@type.Index" class="btn btn-sm btn-outline-danger">
+                Delete
+            </a>
        </li>
 }
 </ul>

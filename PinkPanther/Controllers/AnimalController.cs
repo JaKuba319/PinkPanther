@@ -21,7 +21,8 @@ namespace PinkPanther.Controllers
         */
         public IActionResult Delete(int index)
         {
-            var toDelete = TestDatabaseTODELETE.ANIMALS.Where(animal => animal.Index == index).First();
+            var toDelete = TestDatabaseTODELETE.ANIMALS.Where(animal => animal.Index == index).FirstOrDefault();
+            if(toDelete == null) return RedirectToAction("Index", "Home");
             TestDatabaseTODELETE.ANIMALS.Remove(toDelete);
             return RedirectToAction("Index", "Home");
         }
