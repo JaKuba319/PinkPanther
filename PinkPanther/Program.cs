@@ -1,7 +1,11 @@
+using Microsoft.EntityFrameworkCore;
+using PinkPanther.Database;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddDbContext<PinkPantherDbContex>(options => options.UseSqlServer("Server=.;Database=PinkPantherDatabase;Trusted_Connection=True;"));
 
 var app = builder.Build();
 
@@ -23,5 +27,12 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+
+using (var scope = app.Services.CreateScope())
+{
+    scope.ServiceProvider.GetService<PinkPantherDbContex>().Database.Migrate();
+}
+
 
 app.Run();
