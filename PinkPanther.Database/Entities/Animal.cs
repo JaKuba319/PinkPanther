@@ -11,7 +11,7 @@ namespace PinkPanther.Database
     {
         public string Name { get; set; }
         public string Description { get; set; }
-        public DateOnly BirthDate { get; set; }
+        public DateTime BirthDate { get; set; }
         public bool Gender { get; set; }
         public bool IsVaccinated { get; set; }
 
