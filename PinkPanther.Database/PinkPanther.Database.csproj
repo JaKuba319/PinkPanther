@@ -31,7 +31,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Interfaces\Base\" />
 	  <Folder Include="Repositories\Base\" />
 	</ItemGroup>
 
