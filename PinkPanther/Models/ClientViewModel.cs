@@ -9,5 +9,7 @@
         public bool Sex { get; set; } // 0 female, 1 male
         public DateOnly BirthDate { get; set; }
         public List<AnimalViewModel>? Animals { get; set; }
+
+        //email
     }
 }

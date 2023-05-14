@@ -23,7 +23,7 @@ namespace PinkPanther.Controllers
             return View(adoptionData);
         }
 
-        public IActionResult Adopt(int animalIndex, int clientIndex)
+        public IActionResult AdoptConfirmation(int animalIndex, int clientIndex)
         {
 
             var adoption = new AdoptionViewModel()

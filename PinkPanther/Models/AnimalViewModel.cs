@@ -10,5 +10,6 @@
         public bool IsAdopted { get; set; }
         public DateOnly BirthDate { get; set; }
 
+        //is vaccinated
     }
 }
