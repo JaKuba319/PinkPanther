@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace PinkPanther.Database.Interfaces
+namespace PinkPanther.Database
 {
     public abstract class BaseRepository<Entity> : IBaseRepository<Entity> where Entity : BaseEntity
     {
