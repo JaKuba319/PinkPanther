@@ -21,4 +21,13 @@
 	  <ProjectReference Include="..\PinkPanther.Database\PinkPanther.Database.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="Interfaces\" />
+	  <Folder Include="Managers\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="AutoMapper" Version="12.0.1" />
+	</ItemGroup>
+
 </Project>

@@ -1,6 +1,4 @@
-﻿using PinkPanther.Core;
-
-namespace PinkPanther.Core
+﻿namespace PinkPanther.Core
 {
     public class ClientDto
     {
