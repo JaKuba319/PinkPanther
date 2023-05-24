@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
+using PinkPanther.Core;
 using PinkPanther.Database;
+using PinkPanther.Mappers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +10,14 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<PinkPantherDbContex>(options => 
         options.UseSqlServer("Server=.;Database=PinkPantherDatabase;Trusted_Connection=True;TrustServerCertificate=True;"));
 
+builder.Services.AddTransient<IAnimalRepository, AnimalRepository>();
+builder.Services.AddTransient<IClientRepository, ClientRepository>();
+builder.Services.AddTransient<ITypeRepository, TypeRepository>();
+builder.Services.AddTransient<IRaceRepository, RaceRepository>();
+
+builder.Services.AddTransient<DtoMapper>();
+builder.Services.AddTransient<ViewModelMapper>();
+builder.Services.AddTransient<IManager, Manager>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

@@ -2,7 +2,7 @@
 
 namespace PinkPanther.Core
 {
-    public class Manager
+    public class Manager : IManager
     {
         IAnimalRepository _animalRepository;
         IClientRepository _clientRepository;
