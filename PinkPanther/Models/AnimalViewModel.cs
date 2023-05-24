@@ -2,13 +2,17 @@
 {
     public class AnimalViewModel
     {
-        public int Index { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
-        public string Type { get; set; }
-        public string Race { get; set; }
-        public bool Sex { get; set; } // 0 female, 1 male
-        public bool IsAdopted { get; set; }
+        public string Description { get; set; }
         public DateOnly BirthDate { get; set; }
+        public bool Gender { get; set; } // 0 female, 1 male
+        public bool IsVaccinated { get; set; }
+        public TypeViewModel Type { get; set; }
+        public RaceViewModel Race { get; set; }
+        public ClientViewModel Client { get; set; }
+        
+
 
         //is vaccinated
     }

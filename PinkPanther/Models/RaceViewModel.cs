@@ -2,7 +2,7 @@
 {
     public class RaceViewModel
     {
-        public int Index { get; set; }  
-        public string Race { get; set; }
+        public int Id { get; set; }  
+        public string RaceName { get; set; }
     }
 }

@@ -2,7 +2,7 @@
 {
     public class TypeViewModel
     {
-        public int Index { get; set; }  
-        public string Type { get; set; }
+        public int Id { get; set; }  
+        public string TypeName { get; set; }
     }
 }
