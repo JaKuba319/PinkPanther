@@ -1,8 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PinkPanther.Models;
-using System.Diagnostics;
-using System.Reflection;
-using System.Xml.Linq;
 
 namespace PinkPanther.Controllers
 {

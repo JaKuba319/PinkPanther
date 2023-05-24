@@ -10,7 +10,6 @@ namespace PinkPanther.Database
     {
         public bool AddNew(Entity entity);
         public bool Delete(int id);
-        public bool Delete(Entity entity);
         public bool Update(Entity entity);
         public bool SaveChanges();
     }

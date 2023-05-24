@@ -27,15 +27,6 @@ namespace PinkPanther.Database
             }
             return false;
         }
-        public bool Delete(Entity entity)
-        {
-            if (entity != null)
-            {
-                DbSet.Remove(entity);
-                return SaveChanges();
-            }
-            return false;
-        }
 
         public bool Update(Entity entity)
         {
