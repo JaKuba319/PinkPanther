@@ -59,7 +59,7 @@ namespace PinkPanther.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        [HttpDelete]
+        //[HttpDelete]
         public IActionResult Delete(int id)
         {
             _manager.DeleteAnimal(id);
@@ -70,10 +70,18 @@ namespace PinkPanther.Controllers
         {
             var animal = _manager.GetAnimalById(id);
             if (animal == null) return RedirectToAction("Index", "Home");
-            return View(_mapper.Map(animal));
+
+            var viewModel = new AnimalModifyViewModel()
+            {
+                Animal = _mapper.Map(animal),
+                Types = _mapper.Map(_manager.GetTypes()),
+                Races = _mapper.Map(_manager.GetRaces()),
+            };
+
+            return View(viewModel);
         }
 
-        [HttpPut]
+        //[HttpPut]
         public IActionResult Change(int id, string name, string gender, string birthDate, int raceId, int typeId, string isVaccinated, string description)
         {
             // add validation 

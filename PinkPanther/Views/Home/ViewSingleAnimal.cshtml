@@ -8,6 +8,7 @@
 
 <ul class="list-group">
     <li class="list-group-item">Name: @Model.Name</li>
+    <li class="list-group-item">Description: @Model.Description</li>
     <li class="list-group-item">Type: @Model.Type.TypeName</li>
     <li class="list-group-item">Race: @Model.Race.RaceName</li>
     <li class="list-group-item">Sex: @(Model.Gender ? "male" : "female")</li>
@@ -25,9 +26,9 @@
     </li>
     }
     <li class="list-group-item">
-        <a asp-controller="Animal" asp-action="Modify" asp-route-id="@Model.Id">Modify</a>
+        <a asp-controller="Home" asp-action="Modify" asp-route-id="@Model.Id">Modify</a>
     </li>
     <li class="list-group-item">
-        <a asp-controller="Animal" asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
+        <a asp-controller="Home" asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
     </li>
 </ul>

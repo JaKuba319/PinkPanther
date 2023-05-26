@@ -29,7 +29,7 @@ namespace PinkPanther.Controllers
             return RedirectToAction("Index", "Type");
         }
 
-        [HttpDelete]
+        //[HttpDelete]
         public IActionResult Delete(int id)
         {
             _manager.DeleteType(id);

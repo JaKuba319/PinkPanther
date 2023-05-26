@@ -58,7 +58,7 @@ namespace PinkPanther.Controllers
             return RedirectToAction("Index", "Clients");
         }
 
-        [HttpDelete]
+        //[HttpDelete]
         public IActionResult Delete(int id)
         {
             _manager.DeleteClient(id);

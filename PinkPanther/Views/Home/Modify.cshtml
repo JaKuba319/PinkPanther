@@ -1,39 +1,65 @@
-﻿@model AnimalViewModel
+﻿@model AnimalModifyViewModel
 
 @{
     ViewData["Title"] = "Animal Page";
 }
 <h1>
-    Modify #@Model.Id @Model.Name's data
+    Modify #@Model.Animal.Id @Model.Animal.Name's data
 </h1>
 
-<form asp-controller="Animal" asp-action="Change" asp-route-id="@Model.Id" class="form-group mb-5">
+<form asp-controller="Home" asp-action="Change" asp-route-id="@Model.Animal.Id" class="form-group mb-5">
     <label for="name">Input new name:</label>
-    <input type="text" id="name" name="name" class="form-control" />
+    <input type="text" id="name" name="name" class="form-control" value="@Model.Animal.Name" />
 
     <label for="typeId">Input new type:</label>
     <select id="typeId" name="typeId" class="form-select form-select-sm">
-        <option value="1">Type 1</option>
+        @foreach(var type in Model.Types)
+        {
+        <option value="@type.Id">@type.TypeName</option>
+        }
     </select>
 
     <label for="raceId">Input new race:</label>
     <select id="raceId" name="raceId" class="form-select form-select-sm">
-        <option value="1">Race 1</option>
+        @foreach (var race in Model.Races)
+        {
+            <option value="@race.Id">@race.RaceName</option>
+        }
     </select>
 
     <label for="birthDate">Input new date of birth:</label>
-    <input type="date" id="birthDate" name="birthDate" class="form-control" />
+    <input type="date" id="birthDate" name="birthDate" class="form-control" value="@Model.Animal.BirthDate.ToString("yyyy-MM-dd")" />
 
     <label for="gender">Input new gender:</label>
     <select id="gender" name="gender" class="form-select form-select-sm mb-3">
-        <option value="1">Male</option>
-        <option value="0">Female</option>
+        @if(Model.Animal.Gender)
+        {
+            <option selected value="1">Male</option>
+            <option value="0">Female</option>
+        }
+        else
+        {
+            <option value="1">Male</option>
+            <option selected value="0">Female</option>
+        }
+        
+        
     </select>
 
     <label for="isVaccinated">Input new gender:</label>
     <select id="isVaccinated" name="isVaccinated" class="form-select form-select-sm mb-3">
-        <option value="1">Yes</option>
-        <option value="0">No</option>
+        @if (Model.Animal.IsVaccinated)
+        {
+            <option selected value="1">Yes</option>
+            <option value="0">No</option>
+        }
+        else
+        {
+            <option value="1">Yes</option>
+            <option selected value="0">No</option>
+        }
+
+        
     </select>
 
     <label for="adopted">Change to not adopted: (Not available for now)</label>
@@ -43,7 +69,7 @@
     </select>
 
     <label for="description">Other information (description):</label>
-    <input type="text" id="description" name="description" class="form-control" />
-
-    <button type="submit" class="btn btn-outline-secondary">Modify animal!</button>
+    <input type="text" id="description" name="description" class="form-control" value="@Model.Animal.Description"/>
+    
+    <button type="submit" class="btn btn-outline-secondary mt-3">Modify animal!</button>
 </form>

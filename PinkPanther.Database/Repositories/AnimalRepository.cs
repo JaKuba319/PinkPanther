@@ -21,6 +21,7 @@ namespace PinkPanther.Database
             if (oldEntity != null)
             {
                 oldEntity.Name = entity.Name;
+                oldEntity.Description = entity.Description;
                 oldEntity.TypeId = entity.TypeId;
                 oldEntity.RaceId = entity.RaceId;
                 oldEntity.IsVaccinated = entity.IsVaccinated;
