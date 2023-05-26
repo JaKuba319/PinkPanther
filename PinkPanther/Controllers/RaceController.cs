@@ -1,46 +1,65 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using PinkPanther.Core;
+using PinkPanther.Mappers;
 using PinkPanther.Models;
-using System.Security.Cryptography.Xml;
 
 namespace PinkPanther.Controllers
 {
     public class RaceController : Controller
     {
-        private readonly List<RaceViewModel> _races = TestDatabaseTODELETE.RACES;
-
+        readonly ViewModelMapper _mapper;
+        readonly IManager _manager;
+        public RaceController(IManager manager, ViewModelMapper mapper)
+        {
+            _mapper = mapper;
+            _manager = manager;
+        }
         public IActionResult Index()
         {
-            return View(_races);
+            var races = _manager.GetRaces();
+
+            return View(_mapper.Map(races));
         }
-        public IActionResult Modify(int index)
+
+        [HttpPost]
+        public IActionResult Add(string race)
         {
-            var race = _races.Where(race => race.Index == index).FirstOrDefault();
+            _manager.AddRace(new RaceDto() { RaceName = race });
+            return RedirectToAction("Index", "Race");
+        }
+
+        [HttpDelete]
+        public IActionResult Delete(int id)
+        {
+            _manager.DeleteRace(id);
+
+            return RedirectToAction("Index", "Race");
+        }
+
+        public IActionResult Modify(int id)
+        {
+            var races = _manager.GetRaces();
+            var race = races.Where(race => race.Id == id).FirstOrDefault();
             if (race != null)
             {
-                return View(race);
+                return View(_mapper.Map(race));
             }
             return RedirectToAction("Index", "Race");
         }
 
-        public IActionResult ChangeType(int index, string race)
+        [HttpPut]
+        public IActionResult Change(int id, string race)
         {
-            //send changes to database
             if (!string.IsNullOrEmpty(race))
             {
-                var racevm = new RaceViewModel() { Index = index, Race = race };
+                var racevm = new RaceViewModel() { Id = id, RaceName = race };
 
-                TestDatabaseTODELETE.RACES[index] = racevm;
+                _manager.UpdateRace(_mapper.Map(racevm));
             }
 
             return RedirectToAction("Index", "Race");
         }
 
-        public IActionResult Delete(int index)
-        {
-            var toDelete = TestDatabaseTODELETE.RACES.Where(race => race.Index == index).FirstOrDefault();
-            if (toDelete == null) return RedirectToAction("Index", "Race");
-            TestDatabaseTODELETE.RACES.Remove(toDelete);
-            return RedirectToAction("Index", "Race");
-        }
+        
     }
 }

@@ -9,19 +9,19 @@
     </h2>
 
     <fieldset>
-        <select id="animalIndex" name="animalIndex" class="form-select form-select-sm">
+        <select id="animalId" name="animalId" class="form-select form-select-sm">
         @foreach (var animal in Model.Animals)
         {
-            @if (Model.SelectedAnimal != null && animal.Index == Model.SelectedAnimal.Index)
+                @if (Model.SelectedAnimal != null && animal.Id == Model.SelectedAnimal.Id)
             {
-                <option selected value="@animal.Index">
-                    @animal.Index | @animal.Name
+                    <option selected value="@animal.Id">
+                        @animal.Id | @animal.Name
                 </option>
             }
             else
             {
-                <option value="@animal.Index">
-                    @animal.Index | @animal.Name
+                    <option value="@animal.Id">
+                        @animal.Id | @animal.Name
                 </option>
             }
         }
@@ -33,11 +33,11 @@
     </h2>
 
     <fieldset>
-        <select id="clientIndex" name="clientIndex" class="form-select form-select-sm">
+        <select id="clientId" name="clientId" class="form-select form-select-sm">
         @foreach (var client in Model.Clients)
         {
-            <option value="@client.Index">
-                @client.Index | @client.Name @client.LastName
+                <option value="@client.Id">
+                    @client.Id | @client.FirstName @client.LastName
             </option>
             }
         }

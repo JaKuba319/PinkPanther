@@ -24,8 +24,8 @@ namespace PinkPanther.Database
         public virtual Race Race { get; set; }
 
         [ForeignKey("Client")]
-        public int ClientId { get; set; }
-        public virtual Client Client { get; set; }
+        public int? ClientId { get; set; }
+        public virtual Client? Client { get; set; }
 
     }
 }

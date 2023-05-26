@@ -3,10 +3,10 @@
     ViewData["Title"] = "Race Page";
 }
 
-<form class="form-group mb-3">
+<form class="form-group mb-3" asp-action="Add" asp-controller="Race">
     <h1>Add new race of animal:</h1>
-    <label for="raceName">Input race:</label>
-    <input type="text" id="raceName" name="raceName" class="form-control mb-3" />
+    <label for="race">Input race:</label>
+    <input type="text" id="race" name="race" class="form-control mb-3" />
 
     <button type="submit" class="btn btn-outline-secondary">Add!</button>
 </form>
@@ -17,11 +17,11 @@
     @foreach (var race in Model)
     {
         <li class="list-group-item">
-            @race.Index | @race.Race
-            <a asp-controller="Race" asp-action="Modify" asp-route-index="@race.Index" class="btn btn-sm btn-outline-success">
+            @race.Id | @race.RaceName
+            <a asp-controller="Race" asp-action="Modify" asp-route-id="@race.Id" class="btn btn-sm btn-outline-success">
                 Modify
             </a>
-            <a asp-controller="Race" asp-action="Delete" asp-route-index="@race.Index" class="btn btn-sm btn-outline-danger">
+            <a asp-controller="Race" asp-action="Delete" asp-route-id="@race.Id" class="btn btn-sm btn-outline-danger">
                 Delete
             </a>
         </li>

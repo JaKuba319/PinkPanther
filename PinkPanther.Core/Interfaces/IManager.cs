@@ -2,6 +2,10 @@
 {
     public interface IManager
     {
+        public bool AddAnimal(AnimalDto animal);
+        public bool AddClient(ClientDto client);
+        public bool AddRace(RaceDto race);
+        public bool AddType(TypeDto type);
         public AnimalDto GetAnimalById(int id);
         public IEnumerable<AnimalDto> GetAnimals(string filterstring, string type, bool adoptedOnly = false, bool vaccinatedOnly = false);
         public ClientDto GetClientById(int id);

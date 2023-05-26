@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using PinkPanther.Core;
+using PinkPanther.Mappers;
 using PinkPanther.Models;
 using System.Diagnostics;
 
@@ -6,67 +8,95 @@ namespace PinkPanther.Controllers
 {
     public class HomeController : Controller
     {
-        // List of animals available to adopt
-        private readonly List<AnimalViewModel> _animals = TestDatabaseTODELETE.ANIMALS;
+        readonly ViewModelMapper _mapper;
+        readonly IManager _manager;
+
+        public HomeController(IManager manager, ViewModelMapper mapper)
+        {
+            _mapper = mapper;
+            _manager = manager;
+        }
 
         public IActionResult Index(string filterstring, string type, bool adoptedOnly = false)
         {
-            var model = new AnimalsAndTypesViewModel();
-            var animals = _animals;
-            if(string.IsNullOrEmpty(filterstring) && string.IsNullOrEmpty(type))
+            // is vaccinated filter
+            var model = new AnimalsTypesRacesViewModel
             {
-                model.Animals = animals.Where(animal => animal.IsAdopted == adoptedOnly || !adoptedOnly);
-                model.Types = _animals.Select(animal => animal.Type).Distinct();
-
-                return View(model);
-            }
-
-            if(string.IsNullOrEmpty(filterstring))
-            {
-                animals = animals.Where(animal => animal.Type == type).ToList(); 
-            }
-            else if (string.IsNullOrEmpty(type))
-            {
-                filterstring = filterstring.Trim().ToLower();
-                animals = animals.Where(animal => animal.Name.ToLower().Contains(filterstring) ).ToList();
-            }
-            else
-            {
-                filterstring = filterstring.Trim().ToLower();
-                animals = animals.Where(animal => animal.Type == type).ToList();
-                animals = animals.Where(animal => animal.Name.ToLower().Contains(filterstring)).ToList();
-            }
-
-            model.Animals = animals;
-            model.Types = _animals.Select(animal => animal.Type).Distinct();
+                Animals = _mapper.Map(_manager.GetAnimals(filterstring, type, adoptedOnly)),
+                Types = _mapper.Map(_manager.GetTypes()),
+                Races = _mapper.Map(_manager.GetRaces())
+            };
 
             return View(model);
         }
 
-        public IActionResult ViewSingleAnimal(int indexOfAnimal)
+        public IActionResult ViewSingleAnimal(int id)
         {
-            return RedirectToAction("Index", "Animal", new { index = indexOfAnimal });
+            var animal = _manager.GetAnimalById(id);
+            if (animal == null) return RedirectToAction("Index", "Home");
+            return View(_mapper.Map(animal));
         }
 
-        public IActionResult Add(string animalName, string race, string type, string animalGender, string animalBirthDate)
+        [HttpPost]
+        public IActionResult Add(string name, string description, int raceId, int typeId, string animalGender, string isVaccinated, string animalBirthDate)
         {
             // add validation 
-
-            var animal = new AnimalViewModel()
+            var race = _manager.GetRaceById(raceId);
+            var type = _manager.GetTypeById(typeId);
+            var animal = new AnimalDto()
             { 
-                Index = TestDatabaseTODELETE.ANIMALS.Last().Index + 1,
-                Name = animalName,
+                Name = name,
+                Description = description,
                 Race = race,
                 Type = type,
                 BirthDate = DateOnly.Parse(animalBirthDate),
-                Sex = animalGender == "1"
+                Gender = animalGender == "1",
+                IsVaccinated = isVaccinated == "1"
             };
 
-            TestDatabaseTODELETE.ANIMALS.Add(animal);
+            _manager.AddAnimal(animal);
             
             return RedirectToAction("Index", "Home");
         }
 
+        [HttpDelete]
+        public IActionResult Delete(int id)
+        {
+            _manager.DeleteAnimal(id);
+            return RedirectToAction("Index", "Home");
+        }
+
+        public IActionResult Modify(int id)
+        {
+            var animal = _manager.GetAnimalById(id);
+            if (animal == null) return RedirectToAction("Index", "Home");
+            return View(_mapper.Map(animal));
+        }
+
+        [HttpPut]
+        public IActionResult Change(int id, string name, string gender, string birthDate, int raceId, int typeId, string isVaccinated, string description)
+        {
+            // add validation 
+            var oldAnimal = _manager.GetAnimalById(id);
+            if (oldAnimal == null) return RedirectToAction("Index", "Home");
+
+            var animal = new AnimalViewModel()
+            {
+                Id = id,
+                BirthDate = DateOnly.Parse(birthDate),
+                Name = name,
+                Gender = gender == "1",
+                IsVaccinated = isVaccinated == "1",
+                Description = description,
+                Race = _mapper.Map(_manager.GetRaceById(raceId)),
+                Type = _mapper.Map(_manager.GetTypeById(typeId)),
+                Client = _mapper.Map(oldAnimal.Client)
+            };
+
+            _manager.UpdateAnimal(_mapper.Map(animal));
+
+            return RedirectToAction("Index", "Home");
+        }
 
         public IActionResult Privacy()
         {

@@ -1,0 +1,33 @@
+﻿@model AnimalViewModel
+
+@{
+    ViewData["Title"] = "Animal Page";
+}
+<h1 class="text-center">This is @(Model.Name)'s data page!</h1>
+
+
+<ul class="list-group">
+    <li class="list-group-item">Name: @Model.Name</li>
+    <li class="list-group-item">Type: @Model.Type.TypeName</li>
+    <li class="list-group-item">Race: @Model.Race.RaceName</li>
+    <li class="list-group-item">Sex: @(Model.Gender ? "male" : "female")</li>
+    <li class="list-group-item">Date of birth: @Model.BirthDate</li>
+    <li class="list-group-item">Is adopted? @(Model.Client != null ? "Yes" : "No")</li>
+</ul>
+
+
+<h3>Other actions:</h3>
+<ul class="list-group">
+    @if (Model.Client == null)
+    {
+    <li class="list-group-item">
+        <a asp-controller="Adoption" asp-action="Index" asp-route-id="@Model.Id">Adopt</a>
+    </li>
+    }
+    <li class="list-group-item">
+        <a asp-controller="Animal" asp-action="Modify" asp-route-id="@Model.Id">Modify</a>
+    </li>
+    <li class="list-group-item">
+        <a asp-controller="Animal" asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
+    </li>
+</ul>

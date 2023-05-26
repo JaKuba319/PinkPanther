@@ -1,4 +1,4 @@
-﻿@model AnimalsAndTypesViewModel
+﻿@model AnimalsTypesRacesViewModel
 @{
     ViewData["Title"] = "Animals Page";
 }
@@ -9,17 +9,23 @@
     <h1>
         Add new animal to database:
     </h1>
-    <label for="animalName">Input animal's name (if it does not have one then do not input anything):</label>
-    <input type="text" id="animalName" name="animalName" class="form-control" />
+    <label for="name">Input animal's name (if it does not have one then do not input anything):</label>
+    <input type="text" id="name" name="name" class="form-control" />
 
     <label for="type">Input animal's type:</label>
-    <select id="type" name="type" class="form-select form-select-sm">
-        <option value="type 1">Type 1</option>
+    <select id="typeId" name="typeId" class="form-select form-select-sm">
+        @foreach (var type in Model.Types)
+        {
+            <option value="@type.Id">@type.TypeName</option>
+        }
     </select>
 
-    <label for="race">Input animal's race:</label>
-    <select id="race" name="race" class="form-select form-select-sm">
-        <option value="race 1">Race 1</option>
+    <label for="raceId">Input animal's race:</label>
+    <select id="raceId" name="raceId" class="form-select form-select-sm">
+        @foreach(var race in Model.Races)
+        {
+            <option value="@race.Id">@race.RaceName</option>
+        }
     </select>
 
     <label for="animalBirthDate">Input animal's date of birth:</label>
@@ -30,6 +36,15 @@
         <option value="1">Male</option>
         <option value="0">Female</option>
     </select>
+
+    <label for="isVaccinated">Input if animal is vaccinated:</label>
+    <select id="isVaccinated" name="isVaccinated" class="form-select form-select-sm mb-3">
+        <option value="1">Yes</option>
+        <option value="0">No</option>
+    </select>
+
+    <label for="description">Other information (description):</label>
+    <input type="text" id="description" name="description" class="form-control" />
 
     <button type="submit" class="btn btn-outline-secondary">Add new animal!</button>
 </form>
@@ -48,7 +63,7 @@
             <option value="">Any</option>
             @foreach (var type in Model.Types)
             {
-                <option value="@type">@type</option>
+                <option value="@type.TypeName">@type.TypeName</option>
 
             }
         </select> <br />
@@ -92,28 +107,28 @@
         {
             <tr>
                 <td>
-                    @animal.Index
+                    @animal.Id
                 </td>
                 <td>
                     @animal.Name
                 </td>
                 <td>
-                    @animal.Type
+                    @animal.Type.TypeName
                 </td>
                 <td>
-                    @animal.Race
+                    @animal.Race.RaceName
                 </td>
                 <td>
-                    @(animal.Sex ? "male" : "female")
+                    @(animal.Gender ? "male" : "female")
                 </td>
                 <td>
                     @animal.BirthDate
                 </td>
                 <td>
-                    @animal.IsAdopted
+                    @(animal.Client != null)
                 </td>
                 <td>
-                    <a asp-controller="Animal" asp-action="Index" asp-route-index="@animal.Index">Show</a>
+                    <a asp-controller="Home" asp-action="ViewSingleAnimal" asp-route-id="@animal.Id">Show</a>
                 </td>
             </tr>
         }

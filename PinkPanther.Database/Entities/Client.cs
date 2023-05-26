@@ -16,7 +16,6 @@ namespace PinkPanther.Database
         public string PhoneNumber { get; set; }
         public bool Gender { get; set; }
 
-        [NotMapped]
         public virtual List<Animal> Animals { get; set; }
     }
 }

@@ -14,5 +14,21 @@ namespace PinkPanther.Database
         {
             return DbSet.Include(animal => animal.Type).Include(animal => animal.Race).Include(animal => animal.Client);
         }
+
+        public override bool Update(Animal entity)
+        {
+            var oldEntity = DbSet.Where(_entity => _entity.Id == entity.Id).FirstOrDefault();
+            if (oldEntity != null)
+            {
+                oldEntity.Name = entity.Name;
+                oldEntity.TypeId = entity.TypeId;
+                oldEntity.RaceId = entity.RaceId;
+                oldEntity.IsVaccinated = entity.IsVaccinated;
+                oldEntity.Gender = entity.Gender;
+                oldEntity.BirthDate = entity.BirthDate;
+                return SaveChanges();
+            }
+            return false;
+        }
     }
 }

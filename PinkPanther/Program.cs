@@ -7,8 +7,13 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddDbContext<PinkPantherDbContex>(options => 
-        options.UseSqlServer("Server=.;Database=PinkPantherDatabase;Trusted_Connection=True;TrustServerCertificate=True;"));
+builder.Services.AddDbContext<PinkPantherDbContex>(options =>
+{
+    options.UseSqlServer("Server=.;Database=PinkPantherDatabase;Trusted_Connection=True;TrustServerCertificate=True;");
+    options.EnableSensitiveDataLogging(true);
+});
+
+        
 
 builder.Services.AddTransient<IAnimalRepository, AnimalRepository>();
 builder.Services.AddTransient<IClientRepository, ClientRepository>();

@@ -1,66 +1,98 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using PinkPanther.Core;
+using PinkPanther.Mappers;
 using PinkPanther.Models;
 
 namespace PinkPanther.Controllers
 {
     public class ClientsController : Controller
     {
-        private readonly List<ClientViewModel> _clients = TestDatabaseTODELETE.CLIENTS;
+        readonly ViewModelMapper _mapper;
+        readonly IManager _manager;
+        public ClientsController(IManager manager, ViewModelMapper mapper)
+        {
+            _mapper = mapper;
+            _manager = manager;
+        }
         public IActionResult Index(string filterString, string genderFilter)
         {
-            if(string.IsNullOrEmpty(filterString) && string.IsNullOrEmpty(genderFilter))
+            IEnumerable<ClientDto> clients;
+
+            if (!string.IsNullOrEmpty(genderFilter))
             {
-                return View(_clients);
-            }
-            var clients = (IEnumerable<ClientViewModel>)_clients;
-            if(string.IsNullOrEmpty(genderFilter))
-            {
-                filterString = filterString.Trim().ToLower();
-                clients = clients.Where(client => client.Name.ToLower().Contains(filterString) || client.LastName.ToLower().Contains(filterString));
-            }
-            else if(string.IsNullOrEmpty(filterString))
-            {
-                if (genderFilter == "1")
-                {
-                    clients = clients.Where(client => client.Sex);
-                }
-                else
-                {
-                    clients = clients.Where(client => !client.Sex);
-                }
+                clients = _manager.GetClients(filterString, genderFilter == "1");
             }
             else
             {
-                if (genderFilter == "1")
-                {
-                    clients = clients.Where(client => client.Sex);
-                }
-                else
-                {
-                    clients = clients.Where(client => !client.Sex);
-                }
-                filterString = filterString.Trim().ToLower();
-                clients = clients.Where(client => client.Name.ToLower().Contains(filterString) || client.LastName.ToLower().Contains(filterString));
+                clients = _manager.GetClients(filterString);
             }
-            
-            return View(clients);
+
+            return View(_mapper.Map(clients));
         }
 
-        public IActionResult Add(string clientName, string lastName, string clientBirthDate, string phoneNumber, string clientGender)
+        public IActionResult ViewSingleClient(int id)
+        {
+            var client = _manager.GetClientById(id);
+            if (client == null) return RedirectToAction("Index", "Clients");
+            return View(_mapper.Map(client));
+        }
+
+
+        [HttpPost]
+        public IActionResult Add(string firstName, string lastName, string clientBirthDate, string phoneNumber, string email, string clientGender)
         {
             // add validation 
 
             var client = new ClientViewModel()
             {
-                Name = clientName,
+                FirstName = firstName,
                 LastName = lastName,
                 PhoneNumber = phoneNumber,
-                Sex = clientGender == "1",
-                BirthDate = DateOnly.Parse(clientBirthDate),
-                Index = TestDatabaseTODELETE.CLIENTS.Last().Index + 1
+                Email = email,
+                Gender = clientGender == "1",
+                BirthDate = DateOnly.Parse(clientBirthDate)
             };
 
-            TestDatabaseTODELETE.CLIENTS.Add(client);
+            _manager.AddClient(_mapper.Map(client));
+
+            return RedirectToAction("Index", "Clients");
+        }
+
+        [HttpDelete]
+        public IActionResult Delete(int id)
+        {
+            _manager.DeleteClient(id);
+            return RedirectToAction("Index", "Clients");
+        }
+
+        public IActionResult Modify(int id)
+        {
+            var client = _manager.GetClientById(id);
+            if (client == null) return RedirectToAction("Index", "Clients");
+            return View(_mapper.Map(client));
+        }
+
+        [HttpPut]
+        public IActionResult Change(int id, string firstName, string lastName, string gender, string birthDate, string phoneNumber, string email)
+        {
+            // add validation
+            var oldClient = _manager.GetClientById(id);
+            if (oldClient == null) return RedirectToAction("Index", "Clients");
+
+            var client = new ClientViewModel()
+            {
+                Id = id,
+                FirstName = firstName,
+                LastName = lastName,
+                PhoneNumber = phoneNumber,
+                Email = email,
+                Gender = gender == "1",
+                BirthDate = DateOnly.Parse(birthDate),
+                Animals = _mapper.Map(oldClient.Animals)
+            };
+
+            _manager.UpdateClient(_mapper.Map(client));
+
             return RedirectToAction("Index", "Clients");
         }
     }

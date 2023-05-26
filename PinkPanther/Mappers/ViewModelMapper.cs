@@ -23,14 +23,14 @@ namespace PinkPanther.Mappers
         public ClientViewModel Map(ClientDto clientDto)
             => _mapper.Map<ClientViewModel>(clientDto);
 
-        public List<ClientViewModel> Map(List<ClientDto> clientDtos)
-            => _mapper.Map<List<ClientViewModel>>(clientDtos);
+        public IEnumerable<ClientViewModel> Map(IEnumerable<ClientDto> clientDtos)
+            => _mapper.Map<IEnumerable<ClientViewModel>>(clientDtos);
 
         public ClientDto Map(ClientViewModel client)
             => _mapper.Map<ClientDto>(client);
 
-        public List<ClientDto> Map(List<ClientViewModel> clients)
-            => _mapper.Map<List<ClientDto>>(clients);
+        public IEnumerable<ClientDto> Map(IEnumerable<ClientViewModel> clients)
+            => _mapper.Map<IEnumerable<ClientDto>>(clients);
 
         #endregion
 
@@ -38,14 +38,14 @@ namespace PinkPanther.Mappers
         public AnimalViewModel Map(AnimalDto animalDto)
             => _mapper.Map<AnimalViewModel>(animalDto);
 
-        public List<AnimalViewModel> Map(List<AnimalDto> animalDtos)
-            => _mapper.Map<List<AnimalViewModel>>(animalDtos);
+        public IEnumerable<AnimalViewModel> Map(IEnumerable<AnimalDto> animalDtos)
+            => _mapper.Map<IEnumerable<AnimalViewModel>>(animalDtos);
 
         public AnimalDto Map(AnimalViewModel animal)
             => _mapper.Map<AnimalDto>(animal);
 
-        public List<AnimalDto> Map(List<AnimalViewModel> animals)
-            => _mapper.Map<List<AnimalDto>>(animals);
+        public IEnumerable<AnimalDto> Map(IEnumerable<AnimalViewModel> animals)
+            => _mapper.Map<IEnumerable<AnimalDto>>(animals);
 
         #endregion
 
@@ -54,14 +54,14 @@ namespace PinkPanther.Mappers
         public TypeViewModel Map(TypeDto typeDto)
             => _mapper.Map<TypeViewModel>(typeDto);
 
-        public List<TypeViewModel> Map(List<TypeDto> typeDtos)
-            => _mapper.Map<List<TypeViewModel>>(typeDtos);
+        public IEnumerable<TypeViewModel> Map(IEnumerable<TypeDto> typeDtos)
+            => _mapper.Map<IEnumerable<TypeViewModel>>(typeDtos);
 
         public TypeDto Map(TypeViewModel type)
             => _mapper.Map<TypeDto>(type);
 
-        public List<TypeDto> Map(List<TypeViewModel> types)
-            => _mapper.Map<List<TypeDto>>(types);
+        public IEnumerable<TypeDto> Map(IEnumerable<TypeViewModel> types)
+            => _mapper.Map<IEnumerable<TypeDto>>(types);
 
         #endregion
 
@@ -69,14 +69,14 @@ namespace PinkPanther.Mappers
         public RaceViewModel Map(RaceDto raceDto)
             => _mapper.Map<RaceViewModel>(raceDto);
 
-        public List<RaceViewModel> Map(List<RaceDto> raceDtos)
-            => _mapper.Map<List<RaceViewModel>>(raceDtos);
+        public IEnumerable<RaceViewModel> Map(IEnumerable<RaceDto> raceDtos)
+            => _mapper.Map<IEnumerable<RaceViewModel>>(raceDtos);
 
         public RaceDto Map(RaceViewModel race)
             => _mapper.Map<RaceDto>(race);
 
-        public List<RaceDto> Map(List<RaceViewModel> races)
-            => _mapper.Map<List<RaceDto>>(races);
+        public IEnumerable<RaceDto> Map(IEnumerable<RaceViewModel> races)
+            => _mapper.Map<IEnumerable<RaceDto>>(races);
         #endregion
     }
 }

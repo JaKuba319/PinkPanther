@@ -6,11 +6,11 @@
     Race modify
 </h1>
 
-@Model.Index 
+@Model.Id 
 <br />
-@Model.Race
+@Model.RaceName
 
-<form asp-action="ChangeType" asp-controller="Race" asp-route-index="@Model.Index">
+<form asp-action="Change" asp-controller="Race" asp-route-id="@Model.Id">
     <label for="race">
         Input new race:
     </label>

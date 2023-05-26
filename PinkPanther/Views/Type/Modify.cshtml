@@ -5,11 +5,11 @@
 
 Type modify
 
-@Model.Index
+@Model.Id
 <br />
-@Model.Type
+@Model.TypeName
 
-<form asp-action="ChangeType" asp-controller="Type" asp-route-index="@Model.Index">
+<form asp-action="Change" asp-controller="Type" asp-route-id="@Model.Id">
     <label for="type">
         Input new type:
     </label>

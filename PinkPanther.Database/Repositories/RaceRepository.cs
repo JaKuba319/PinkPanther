@@ -1,9 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PinkPanther.Database
 {
@@ -18,6 +13,17 @@ namespace PinkPanther.Database
         public IEnumerable<Race> GetRaces()
         {
             return DbSet;
+        }
+
+        public override bool Update(Race entity)
+        {
+            var oldEntity = DbSet.Where(_entity => _entity.Id == entity.Id).FirstOrDefault();
+            if (oldEntity != null)
+            {
+                oldEntity.RaceName = entity.RaceName;
+                return SaveChanges();
+            }
+            return false;
         }
     }
 }

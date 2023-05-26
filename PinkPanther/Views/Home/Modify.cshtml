@@ -4,21 +4,21 @@
     ViewData["Title"] = "Animal Page";
 }
 <h1>
-    Modify #@Model.Index @Model.Name's data
+    Modify #@Model.Id @Model.Name's data
 </h1>
 
-<form asp-controller="Animal" asp-action="Change" asp-route-index="@Model.Index" class="form-group mb-5">
+<form asp-controller="Animal" asp-action="Change" asp-route-id="@Model.Id" class="form-group mb-5">
     <label for="name">Input new name:</label>
     <input type="text" id="name" name="name" class="form-control" />
 
-    <label for="type">Input new type:</label>
-    <select id="type" name="type" class="form-select form-select-sm">
-        <option value="type 1">Type 1</option>
+    <label for="typeId">Input new type:</label>
+    <select id="typeId" name="typeId" class="form-select form-select-sm">
+        <option value="1">Type 1</option>
     </select>
 
-    <label for="race">Input new race:</label>
-    <select id="race" name="race" class="form-select form-select-sm">
-        <option value="race 1">Race 1</option>
+    <label for="raceId">Input new race:</label>
+    <select id="raceId" name="raceId" class="form-select form-select-sm">
+        <option value="1">Race 1</option>
     </select>
 
     <label for="birthDate">Input new date of birth:</label>
@@ -30,11 +30,20 @@
         <option value="0">Female</option>
     </select>
 
+    <label for="isVaccinated">Input new gender:</label>
+    <select id="isVaccinated" name="isVaccinated" class="form-select form-select-sm mb-3">
+        <option value="1">Yes</option>
+        <option value="0">No</option>
+    </select>
+
     <label for="adopted">Change to not adopted: (Not available for now)</label>
     <select disabled id="adopted" name="adopted" class="form-select form-select-sm mb-3">
         <option value="1">Do not change</option>
         <option value="0">Change</option>
     </select>
+
+    <label for="description">Other information (description):</label>
+    <input type="text" id="description" name="description" class="form-control" />
 
     <button type="submit" class="btn btn-outline-secondary">Modify animal!</button>
 </form>

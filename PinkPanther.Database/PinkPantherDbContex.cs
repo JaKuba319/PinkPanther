@@ -11,7 +11,7 @@ namespace PinkPanther.Database
 
         public PinkPantherDbContex(DbContextOptions options) : base(options)
         {
-
+            
         }
     }
 }

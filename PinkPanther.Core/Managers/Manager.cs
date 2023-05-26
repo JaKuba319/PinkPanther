@@ -10,16 +10,47 @@ namespace PinkPanther.Core
         IRaceRepository _raceRepository;
         DtoMapper _mapper;
 
-        public Manager(IClientRepository clientRepository, ITypeRepository typeRepository, IRaceRepository raceRepository, DtoMapper mapper)
+        public Manager(IAnimalRepository animalRepository, IClientRepository clientRepository, ITypeRepository typeRepository, IRaceRepository raceRepository, DtoMapper mapper)
         {
+            _animalRepository = animalRepository;
             _clientRepository = clientRepository;
             _typeRepository = typeRepository;
             _raceRepository = raceRepository;
             _mapper = mapper;
         }
 
+        #region AddRegion
+        public bool AddAnimal(AnimalDto animal)
+        {
+            var entity = _mapper.Map(animal);
+
+            entity.Client = null;
+            entity.Type = null;
+            entity.Race = null;
+
+            return _animalRepository.AddNew(entity);
+        }
+
+        public bool AddClient(ClientDto client)
+        {
+            var entity = _mapper.Map(client);
+            entity.Animals = _mapper.Map(client.Animals).ToList();
+            return _clientRepository.AddNew(entity);
+        }
+
+        public bool AddRace(RaceDto race)
+        {
+            return _raceRepository.AddNew(_mapper.Map(race));
+        }
+
+        public bool AddType(TypeDto type)
+        {
+            return _typeRepository.AddNew(_mapper.Map(type));
+        }
+        #endregion
+
         #region GetRegion
-        
+
         public AnimalDto GetAnimalById(int id)
         {
             var animal = _animalRepository.GetAnimals().Where(animal => animal.Id == id).FirstOrDefault();
@@ -29,7 +60,9 @@ namespace PinkPanther.Core
 
         public IEnumerable<AnimalDto> GetAnimals(string filterstring, string type, bool adoptedOnly = false, bool vaccinatedOnly = false)
         {
-            var animals = _animalRepository.GetAnimals().ToList();
+            var animals = _animalRepository.GetAnimals();
+
+            if (animals == null) return null;
 
             if (!string.IsNullOrEmpty(type))
             {
@@ -55,10 +88,10 @@ namespace PinkPanther.Core
                     })
                     .ToList();
 
-                return _mapper.Map(animals);
+                return _mapper.Map(animals.ToList());
             }
 
-            return _mapper.Map(animals);
+            return _mapper.Map(animals.ToList());
         }
 
         public ClientDto GetClientById(int id)

@@ -10,10 +10,7 @@
         public bool IsVaccinated { get; set; }
         public TypeViewModel Type { get; set; }
         public RaceViewModel Race { get; set; }
-        public ClientViewModel Client { get; set; }
+        public ClientViewModel? Client { get; set; }
         
-
-
-        //is vaccinated
     }
 }

@@ -3,10 +3,10 @@
     ViewData["Title"] = "Type Page";
 }
 
-<form class="form-group mb-3">
+<form class="form-group mb-3" asp-action="Add" asp-controller="Type">
     <h1>Add new type of animal:</h1>
-    <label for="typeName">Input type:</label>
-    <input type="text" id="typeName" name="typeName" class="form-control mb-3" />
+    <label for="type">Input type:</label>
+    <input type="text" id="type" name="type" class="form-control mb-3" />
     
     <button type="submit" class="btn btn-outline-secondary">Add!</button>
 </form>
@@ -17,11 +17,11 @@
 @foreach(var type in Model)
 {
         <li class="list-group-item">
-            @type.Index | @type.Type
-            <a asp-controller="Type" asp-action="Modify" asp-route-index="@type.Index" class="btn btn-sm btn-outline-success">
+            @type.Id | @type.TypeName
+            <a asp-controller="Type" asp-action="Modify" asp-route-id="@type.Id" class="btn btn-sm btn-outline-success">
                 Modify
             </a>
-            <a asp-controller="Type" asp-action="Delete" asp-route-index="@type.Index" class="btn btn-sm btn-outline-danger">
+            <a asp-controller="Type" asp-action="Delete" asp-route-id="@type.Id" class="btn btn-sm btn-outline-danger">
                 Delete
             </a>
        </li>

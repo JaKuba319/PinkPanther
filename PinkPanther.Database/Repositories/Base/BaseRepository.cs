@@ -28,16 +28,7 @@ namespace PinkPanther.Database
             return false;
         }
 
-        public bool Update(Entity entity)
-        {
-            var oldEntity = DbSet.Where(_entity => _entity.Id == entity.Id).FirstOrDefault();
-            if(oldEntity != null)
-            {
-                oldEntity = entity;
-                return SaveChanges();
-            }
-            return false;
-        }
+        public abstract bool Update(Entity entity);
 
         public bool SaveChanges()
         {

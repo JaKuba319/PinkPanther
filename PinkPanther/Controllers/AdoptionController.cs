@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using PinkPanther.Core;
+using PinkPanther.Mappers;
 using PinkPanther.Models;
 using System.Linq;
 
@@ -6,34 +8,39 @@ namespace PinkPanther.Controllers
 {
     public class AdoptionController : Controller
     {
-        private readonly List<AnimalViewModel> _animals = TestDatabaseTODELETE.ANIMALS.Where(animal => !animal.IsAdopted).ToList();
-
-        private readonly List<ClientViewModel> _clients = TestDatabaseTODELETE.CLIENTS;
-
-        private AdoptionViewModel? _adoption;
-        public IActionResult Index(int index)
+        readonly ViewModelMapper _mapper;
+        readonly IManager _manager;
+        public AdoptionController(IManager manager, ViewModelMapper mapper)
+        {
+            _mapper = mapper;
+            _manager = manager;
+        }
+        public IActionResult Index(int id)
         {
             var adoptionData = new AdoptionDataViewModel 
             { 
-                Animals = _animals,
-                Clients = _clients,
-                SelectedAnimal = _animals.Where(animal => animal.Index == index).FirstOrDefault()
+                Animals = _mapper.Map(_manager.GetAnimals(null, null)),
+                Clients = _mapper.Map(_manager.GetClients(null)),
             };
+
+            if(id != 0)
+            {
+                adoptionData.SelectedAnimal = _mapper.Map(_manager.GetAnimalById(id));
+            }
 
             return View(adoptionData);
         }
 
-        public IActionResult AdoptConfirmation(int animalIndex, int clientIndex)
+        public IActionResult AdoptConfirmation(int animalId, int clientId)
         {
 
             var adoption = new AdoptionViewModel()
             {
-                Animal = TestDatabaseTODELETE.ANIMALS.Where(animal => animal.Index == animalIndex).First(),
-                Client = TestDatabaseTODELETE.CLIENTS.Where(client => client.Index == clientIndex).First(),
+                Animal = _mapper.Map(_manager.GetAnimalById(animalId)),
+                Client = _mapper.Map(_manager.GetClientById(clientId))
             };
-            _adoption = adoption;
 
-            return View(_adoption);
+            return View(adoption);
         }
 
         public IActionResult AdoptSend()

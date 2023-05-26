@@ -24,16 +24,16 @@ Adoption's form data:
     <tbody>
         <tr>
             <td>
+                Id:
+            </td>
+            <td>
+                @Model.Animal.Id
+            </td>
+            <td>
                 Index:
             </td>
             <td>
-                @Model.Animal.Index
-            </td>
-            <td>
-                Index:
-            </td>
-            <td>
-                @Model.Client.Index
+                @Model.Client.FirstName
             </td>
         </tr>
         <tr>
@@ -47,7 +47,7 @@ Adoption's form data:
                 First name:
             </td>
             <td>
-                @Model.Client.Name
+                @Model.Client.FirstName
             </td>
         </tr>
         <tr>
@@ -55,7 +55,7 @@ Adoption's form data:
                 Type:
             </td>
             <td>
-                @Model.Animal.Type
+                @Model.Animal.Type.TypeName
             </td>
             <td>
                 Last name:
@@ -69,7 +69,7 @@ Adoption's form data:
                 Race:
             </td>
             <td>
-                @Model.Animal.Race
+                @Model.Animal.Race.RaceName
             </td>
             <td>
                 Phone number:
@@ -83,13 +83,13 @@ Adoption's form data:
                 Sex:
             </td>
             <td>
-                @(Model.Animal.Sex ? "male" : "female")
+                @(Model.Animal.Gender ? "male" : "female")
             </td>
             <td>
                 Sex:
             </td>
             <td>
-                @(Model.Client.Sex ? "male" : "female")
+                @(Model.Client.Gender ? "male" : "female")
             </td>
         </tr>
         <tr>

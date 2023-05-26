@@ -5,10 +5,10 @@
 
 
 <h1>
-    Modify #@Model.Index client's data:
+    Modify #@Model.Id client's data:
 </h1>
 
-<form asp-controller="Client" asp-action="Change" asp-route-index="@Model.Index" class="form-group mb-5">
+<form asp-controller="Client" asp-action="Change" asp-route-id="@Model.Id" class="form-group mb-5">
     <label for="firstName">Input new first name:</label>
     <input type="text" id="firstName" name="firstName" class="form-control" />
 
@@ -27,5 +27,8 @@
     <label for="phoneNumber">Input new phone numer:</label>
     <input type="text" id="phoneNumber" name="phoneNumber" class="form-control" />
 
-<button type="submit" class="btn btn-outline-secondary mt-3">Modify client!</button>
+    <label for="email">Input new email:</label>
+    <input type="text" id="email" name="email" class="form-control" />
+
+    <button type="submit" class="btn btn-outline-secondary mt-3">Modify client!</button>
 </form>
