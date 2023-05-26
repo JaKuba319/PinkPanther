@@ -37,7 +37,7 @@ namespace PinkPanther.Controllers
             return View(_mapper.Map(animal));
         }
 
-        [HttpPost]
+        //[HttpPost]
         public IActionResult Add(string name, string description, int raceId, int typeId, string animalGender, string isVaccinated, string animalBirthDate)
         {
             // add validation 

@@ -21,7 +21,7 @@ namespace PinkPanther.Controllers
             return View(_mapper.Map(races));
         }
 
-        [HttpPost]
+        //[HttpPost]
         public IActionResult Add(string race)
         {
             _manager.AddRace(new RaceDto() { RaceName = race });
@@ -47,7 +47,7 @@ namespace PinkPanther.Controllers
             return RedirectToAction("Index", "Race");
         }
 
-        [HttpPut]
+        //[HttpPut]
         public IActionResult Change(int id, string race)
         {
             if (!string.IsNullOrEmpty(race))
