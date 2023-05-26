@@ -17,9 +17,9 @@ namespace PinkPanther.Controllers
         }
         public IActionResult Index(int id)
         {
-            var adoptionData = new AdoptionDataViewModel 
-            { 
-                Animals = _mapper.Map(_manager.GetAnimals(null, null)),
+            var adoptionData = new AdoptionDataViewModel
+            {
+                Animals = _mapper.Map(_manager.GetAnimals(null, null)).Where(animal => animal.Client == null),
                 Clients = _mapper.Map(_manager.GetClients(null)),
             };
 
@@ -43,9 +43,12 @@ namespace PinkPanther.Controllers
             return View(adoption);
         }
 
-        public IActionResult AdoptSend()
+        public IActionResult AdoptSend(int animalId, int clientId)
         {
-            //send data to database (_adoption)
+            var animalDto = _manager.GetAnimalById(animalId);
+            var clientDto = _manager.GetClientById(clientId);
+
+            _manager.AddAdoption(animalDto, clientDto);
             return RedirectToAction("Index", "Adoption");
         }
     }

@@ -66,7 +66,14 @@
                 <option value="@type.TypeName">@type.TypeName</option>
 
             }
-        </select> <br />
+        </select> 
+        <br />
+        <label for="adopted">Adoption filter:</label>
+        <select id="adopted" name="adopted" class="form-select form-select-sm">
+            <option value="any">Any</option>
+            <option value="1">Adopted only</option>
+            <option value="0">Not adopted only</option>
+        </select>
     </div>
     <button type="submit" class="btn btn-outline-secondary">Search</button><br />
 </form>
@@ -81,6 +88,9 @@
             </th>
             <th>
                 Name
+            </th>
+            <th>
+                Description
             </th>
             <th>
                 Type
@@ -111,6 +121,13 @@
                 </td>
                 <td>
                     @animal.Name
+                </td>
+                <td>
+                    @animal.Description.Truncate(10)
+                    @if(animal.Description?.Length > 10)
+                    {
+                        <span>[...]</span>
+                    }
                 </td>
                 <td>
                     @animal.Type.TypeName

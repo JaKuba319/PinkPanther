@@ -109,6 +109,6 @@ Adoption's form data:
     </tbody>
 </table>
 
-<form asp-controller="Adoption" asp-action="AdoptSend">
+<form asp-controller="Adoption" asp-action="AdoptSend" asp-route-clientId="@Model.Client.Id" asp-route-animalId="@Model.Animal.Id">
     <button type="submit" class="btn btn-sm btn-outline-success">Add adoption to database</button>
 </form>

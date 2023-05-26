@@ -2,6 +2,7 @@
 {
     public interface IManager
     {
+        public bool AddAdoption(AnimalDto animal, ClientDto client);
         public bool AddAnimal(AnimalDto animal);
         public bool AddClient(ClientDto client);
         public bool AddRace(RaceDto race);

@@ -20,6 +20,20 @@ namespace PinkPanther.Core
         }
 
         #region AddRegion
+
+        public bool AddAdoption(AnimalDto animal, ClientDto client)
+        {
+            var animalEntity = _mapper.Map(animal);
+            var clientEntity = _mapper.Map(client);
+
+            var animalCheck = _animalRepository.GetAnimals().Where(entity => entity.Id == animalEntity.Id).FirstOrDefault();
+            var clientCheck = _clientRepository.GetClients().Where(entity => entity.Id == clientEntity.Id).FirstOrDefault();
+
+            if(animalCheck == null || clientCheck == null) return false;
+
+            return _animalRepository.AddAdoptedAnimal(animalEntity, clientEntity);
+        }
+
         public bool AddAnimal(AnimalDto animal)
         {
             var entity = _mapper.Map(animal);

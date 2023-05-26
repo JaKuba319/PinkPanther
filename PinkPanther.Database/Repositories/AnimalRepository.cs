@@ -31,5 +31,16 @@ namespace PinkPanther.Database
             }
             return false;
         }
+
+        public bool AddAdoptedAnimal(Animal animal, Client client)
+        {
+            var entity = DbSet.Where(entity => entity.Id == animal.Id).FirstOrDefault();
+
+            if (entity == null) return false;
+
+            entity.ClientId = client.Id;
+
+            return SaveChanges();
+        }
     }
 }

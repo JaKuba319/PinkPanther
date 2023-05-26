@@ -14,6 +14,15 @@
     <li class="list-group-item">Sex: @(Model.Gender ? "male" : "female")</li>
     <li class="list-group-item">Date of birth: @Model.BirthDate</li>
     <li class="list-group-item">Is adopted? @(Model.Client != null ? "Yes" : "No")</li>
+    @if(Model.Client != null)
+    {
+        <li class="list-group-item">
+            Adopted by: #@Model.Client.Id | @Model.Client.FirstName @Model.Client.LastName 
+            <br/>
+            <a class="btn btn-sm btn-outline-secondary" asp-action="ViewSingleClient" asp-controller="Clients" asp-route-id="@Model.Client.Id">Show</a>
+
+        </li>
+    }
 </ul>
 
 

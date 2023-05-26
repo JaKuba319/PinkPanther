@@ -17,15 +17,31 @@ namespace PinkPanther.Controllers
             _manager = manager;
         }
 
-        public IActionResult Index(string filterstring, string type, bool adoptedOnly = false)
+        public IActionResult Index(string filterstring, string type, string adopted, bool adoptedOnly = false)
         {
             // is vaccinated filter
             var model = new AnimalsTypesRacesViewModel
             {
-                Animals = _mapper.Map(_manager.GetAnimals(filterstring, type, adoptedOnly)),
                 Types = _mapper.Map(_manager.GetTypes()),
                 Races = _mapper.Map(_manager.GetRaces())
             };
+
+            switch (adopted)
+            {
+                case "1":
+                    adoptedOnly = true;
+                    model.Animals = _mapper.Map(_manager.GetAnimals(filterstring, type, adoptedOnly));
+                    break;
+                case "0":
+                    model.Animals = _mapper.Map(_manager.GetAnimals(filterstring, type, adoptedOnly)).Where(animal => animal.Client == null);
+                    break;
+                default:
+                    adoptedOnly = false;
+                    model.Animals = _mapper.Map(_manager.GetAnimals(filterstring, type, adoptedOnly));
+                    break;
+            }
+
+            
 
             return View(model);
         }
