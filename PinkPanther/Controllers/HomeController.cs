@@ -17,7 +17,7 @@ namespace PinkPanther.Controllers
             _manager = manager;
         }
 
-        public IActionResult Index(string filterstring, string type, string adopted, bool adoptedOnly = false)
+        public IActionResult Index(string filterstring, string type, string adoptedFilter, bool adoptedOnly = false)
         {
             // is vaccinated filter
             var model = new AnimalsTypesRacesViewModel
@@ -26,7 +26,7 @@ namespace PinkPanther.Controllers
                 Races = _mapper.Map(_manager.GetRaces())
             };
 
-            switch (adopted)
+            switch (adoptedFilter)
             {
                 case "1":
                     adoptedOnly = true;
