@@ -42,6 +42,11 @@ namespace PinkPanther.Controllers
         public IActionResult Add(string firstName, string lastName, string clientBirthDate, string phoneNumber, string email, string clientGender)
         {
             // add validation 
+            if (firstName == null || lastName == null || !DateOnly.TryParse(clientBirthDate, out var date))
+            {
+                //error
+                return RedirectToAction("Index", "Clients");
+            }
 
             var client = new ClientViewModel()
             {
@@ -50,7 +55,7 @@ namespace PinkPanther.Controllers
                 PhoneNumber = phoneNumber,
                 Email = email,
                 Gender = clientGender == "1",
-                BirthDate = DateOnly.Parse(clientBirthDate)
+                BirthDate = date
             };
 
             _manager.AddClient(_mapper.Map(client));

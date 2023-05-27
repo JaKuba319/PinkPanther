@@ -24,6 +24,7 @@ namespace PinkPanther.Controllers
         //[HttpPost]
         public IActionResult Add(string type)
         {
+            if(string.IsNullOrEmpty(type)) return RedirectToAction("Index", "Type");
 
             _manager.AddType(new TypeDto() { TypeName = type });
             return RedirectToAction("Index", "Type");

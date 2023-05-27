@@ -2,17 +2,21 @@
 @{
     ViewData["Title"] = "Type Page";
 }
+<h1>
+    Type modify
+</h1>
 
-Type modify
-
-@Model.Id
 <br />
-@Model.TypeName
+
+<h3>
+    #@Model.Id |
+    @Model.TypeName
+</h3>
 
 <form asp-action="Change" asp-controller="Type" asp-route-id="@Model.Id">
     <label for="type">
         Input new type:
     </label>
-    <input type="text" name="type" id="type" />
+    <input type="text" name="type" id="type" value="@Model.TypeName" />
     <button type="submit" class="btn btn-outline-secondary"> Send </button>
 </form>

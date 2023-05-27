@@ -59,13 +59,19 @@ namespace PinkPanther.Controllers
             // add validation 
             var race = _manager.GetRaceById(raceId);
             var type = _manager.GetTypeById(typeId);
+            if(race == null || type == null || !DateOnly.TryParse(animalBirthDate, out var date))
+            {
+                //error
+                return RedirectToAction("Index", "Home");
+            }
+
             var animal = new AnimalDto()
             { 
                 Name = name,
                 Description = description,
                 Race = race,
                 Type = type,
-                BirthDate = DateOnly.Parse(animalBirthDate),
+                BirthDate = date,
                 Gender = animalGender == "1",
                 IsVaccinated = isVaccinated == "1"
             };

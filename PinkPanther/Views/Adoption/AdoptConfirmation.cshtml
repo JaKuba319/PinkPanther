@@ -2,7 +2,10 @@
 @{
     ViewData["Title"] = "Adoption Page";
 }
-Adoption's form data:
+
+<h1 class="display-5">
+    Adoption's form data:
+</h1>
 
 <table class="table">
     <thead>
@@ -30,10 +33,10 @@ Adoption's form data:
                 @Model.Animal.Id
             </td>
             <td>
-                Index:
+                Id:
             </td>
             <td>
-                @Model.Client.FirstName
+                @Model.Client.Id
             </td>
         </tr>
         <tr>
@@ -80,16 +83,34 @@ Adoption's form data:
         </tr>
         <tr>
             <td>
-                Sex:
+                Gender:
             </td>
             <td>
                 @(Model.Animal.Gender ? "male" : "female")
             </td>
             <td>
-                Sex:
+                Gender:
             </td>
             <td>
                 @(Model.Client.Gender ? "male" : "female")
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Description:
+            </td>
+            <td>
+                @Model.Animal.Description.Truncate(23)
+                @if (@Model.Animal.Description?.Length > 10)
+                {
+                    <span>[...]</span>
+                }
+            </td>
+            <td>
+                Email:
+            </td>
+            <td>
+                @Model.Client.Email
             </td>
         </tr>
         <tr>
@@ -106,9 +127,24 @@ Adoption's form data:
                 @Model.Client.BirthDate
             </td>
         </tr>
+        <tr>
+            <td>
+                Vaccinated:
+            </td>
+            <td>
+                @Model.Animal.IsVaccinated
+            </td>
+            <td>
+                
+            </td>
+            <td>
+                
+            </td>
+        </tr>
+        
     </tbody>
 </table>
 
 <form asp-controller="Adoption" asp-action="AdoptSend" asp-route-clientId="@Model.Client.Id" asp-route-animalId="@Model.Animal.Id">
-    <button type="submit" class="btn btn-sm btn-outline-success">Add adoption to database</button>
+    <button type="submit" class="btn btn-outline-success">Add adoption to database</button>
 </form>

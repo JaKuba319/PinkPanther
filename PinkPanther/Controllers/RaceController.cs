@@ -24,6 +24,8 @@ namespace PinkPanther.Controllers
         //[HttpPost]
         public IActionResult Add(string race)
         {
+            if (string.IsNullOrEmpty(race)) return RedirectToAction("Index", "Race");
+
             _manager.AddRace(new RaceDto() { RaceName = race });
             return RedirectToAction("Index", "Race");
         }

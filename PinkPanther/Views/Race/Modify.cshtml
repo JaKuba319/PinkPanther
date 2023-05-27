@@ -6,14 +6,17 @@
     Race modify
 </h1>
 
-@Model.Id 
 <br />
-@Model.RaceName
+
+<h3>
+    #@Model.Id |
+    Race: @Model.RaceName
+</h3>
 
 <form asp-action="Change" asp-controller="Race" asp-route-id="@Model.Id">
     <label for="race">
         Input new race:
     </label>
-    <input type="text" name="race" id="race"/>
+    <input type="text" name="race" id="race" value="@Model.RaceName" />
     <button type="submit" class="btn btn-outline-secondary"> Send </button>
 </form>

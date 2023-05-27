@@ -10,25 +10,33 @@
 
 <form asp-controller="Clients" asp-action="Change" asp-route-id="@Model.Id" class="form-group mb-5">
     <label for="firstName">Input new first name:</label>
-    <input type="text" id="firstName" name="firstName" class="form-control" />
+    <input type="text" id="firstName" name="firstName" class="form-control" value="@Model.FirstName"/>
 
     <label for="lastName">Input new last name:</label>
-    <input type="text" id="lastName" name="lastName" class="form-control" />
+    <input type="text" id="lastName" name="lastName" class="form-control"  value="@Model.LastName"/>
 
     <label for="birthDate">Input new date of birth:</label>
-    <input type="date" id="birthDate" name="birthDate" class="form-control" />
+    <input type="date" id="birthDate" name="birthDate" class="form-control" value="@Model.BirthDate.ToString("yyyy-MM-dd")" />
 
     <label for="gender">Input new gender:</label>
     <select id="gender" name="gender" class="form-select form-select-sm">
-        <option value="1">Male</option>
-        <option value="0">Female</option>
+        @if (Model.Gender)
+        {
+            <option selected value="1">Male</option>
+            <option value="0">Female</option>
+        }
+        else
+        {
+            <option value="1">Male</option>
+            <option selected value="0">Female</option>
+        }
     </select>
 
     <label for="phoneNumber">Input new phone numer:</label>
-    <input type="text" id="phoneNumber" name="phoneNumber" class="form-control" />
+    <input type="text" id="phoneNumber" name="phoneNumber" class="form-control" value="@Model.PhoneNumber"/>
 
     <label for="email">Input new email:</label>
-    <input type="text" id="email" name="email" class="form-control" />
+    <input type="text" id="email" name="email" class="form-control" value="@Model.Email" />
 
     <button type="submit" class="btn btn-outline-secondary mt-3">Modify client!</button>
 </form>

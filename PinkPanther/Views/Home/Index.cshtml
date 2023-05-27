@@ -3,9 +3,13 @@
     ViewData["Title"] = "Animals Page";
 }
 
-<h1 class="display-4">Welcome</h1>
+<h1 class="display-5">Welcome to our shelter</h1>
 
-<form asp-controller="Home" asp-action="Add" class="form-group mb-5">
+<button class="btn btn-outline-success" type="button" data-bs-toggle="collapse" data-bs-target="#addForm">
+    Add New!
+</button>
+
+<form asp-controller="Home" asp-action="Add" class="form-group mb-5 collapse" id="addForm">
     <h1>
         Add new animal to database:
     </h1>
@@ -46,11 +50,12 @@
     <label for="description">Other information (description):</label>
     <input type="text" id="description" name="description" class="form-control" />
 
-    <button type="submit" class="btn btn-outline-secondary">Add new animal!</button>
+    <button type="submit" class="btn btn-outline-secondary mt-3">Add new animal!</button>
 </form>
 
-
+<br />
 <h2>Bellow you can find all animals in our shelter!</h2>
+<h5>Fileter your search</h5>
 
 <form asp-controller="Home" asp-action="Index">
     <div class="form-group">
@@ -75,7 +80,7 @@
             <option value="0">Not adopted only</option>
         </select>
     </div>
-    <button type="submit" class="btn btn-outline-secondary">Search</button><br />
+    <button type="submit" class="btn btn-outline-secondary mt-2">Search</button><br />
 </form>
 
 <h2>Available animals in database:</h2>

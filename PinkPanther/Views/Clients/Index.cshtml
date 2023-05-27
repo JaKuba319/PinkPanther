@@ -1,9 +1,17 @@
 ﻿@model IEnumerable<ClientViewModel>
 @{
-    ViewData["Title"] = "Client Page";
+    ViewData["Title"] = "Clients Page";
 }
 
-<form asp-controller="Clients" asp-action="Add" class="form-group mb-5">
+<h1 class="display-5">
+    Manage clients!
+</h1>
+
+<button class="btn btn-outline-success" type="button" data-bs-toggle="collapse" data-bs-target="#addForm">
+    Add New!
+</button>
+
+<form asp-controller="Clients" asp-action="Add" class="form-group mb-5 collapse" id="addForm">
     <h1>
         Add new client to database:
     </h1>
@@ -32,7 +40,11 @@
     <button type="submit" class="btn btn-outline-secondary mt-3">Add new client!</button>
 </form>
 
-<h2>Fileter your search</h2>
+<br />
+
+<h2>Bellow you can find all clients of our shelter!</h2>
+<h5>Fileter your search</h5>
+
 <form asp-controller="Clients" asp-action="Index">
     <div class="form-group">
         <label for="filterString">Filter:</label>
@@ -44,7 +56,7 @@
             <option value="0">Female</option>
         </select>
     </div>
-    <button type="submit" class="btn btn-outline-secondary mb-3">Search</button><br />
+    <button type="submit" class="btn btn-outline-secondary mb-3 mt-2">Search</button><br />
 </form>
 
 <h2>Available clients in database:</h2>
