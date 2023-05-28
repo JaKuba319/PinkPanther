@@ -64,6 +64,13 @@
         <a asp-controller="Clients" asp-action="Modify" asp-route-id="@Model.Id">Modify</a>
     </li>
     <li class="list-group-item">
+        @if(Model.Animals.Count() > 0)
+        {
+        <a disabled title="You cant delete client with adopted animals">Delete</a>
+        }
+        else
+        {
         <a asp-controller="Clients" asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
+        }
     </li>
 </ul>

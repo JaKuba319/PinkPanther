@@ -11,7 +11,7 @@
     <li class="list-group-item">Description: @Model.Description</li>
     <li class="list-group-item">Type: @Model.Race.Type.TypeName</li>
     <li class="list-group-item">Race: @Model.Race.RaceName</li>
-    <li class="list-group-item">Sex: @(Model.Gender ? "male" : "female")</li>
+    <li class="list-group-item">Gender: @(Model.Gender ? "male" : "female")</li>
     <li class="list-group-item">Date of birth: @Model.BirthDate</li>
     <li class="list-group-item">Is adopted? @(Model.Client != null ? "Yes" : "No")</li>
     @if(Model.Client != null)
