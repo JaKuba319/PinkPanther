@@ -99,7 +99,7 @@
             <td>
                 Description:
             </td>
-            <td>
+            <td title="@Model.Animal.Description">
                 @Model.Animal.Description.Truncate(23)
                 @if (@Model.Animal.Description?.Length > 10)
                 {

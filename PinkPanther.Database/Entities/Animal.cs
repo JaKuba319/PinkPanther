@@ -10,10 +10,6 @@ namespace PinkPanther.Database
         public bool Gender { get; set; }
         public bool IsVaccinated { get; set; }
 
-        //[ForeignKey("Type")]
-        //public int TypeId { get; set; }
-        //public virtual Type Type { get; set; }
-
         [ForeignKey("Race")]
         public int RaceId { get; set; }
         public virtual Race Race { get; set; }

@@ -39,7 +39,6 @@ namespace PinkPanther.Core
             var entity = _mapper.Map(animal);
 
             entity.Client = null;
-            //entity.Type = null;
             entity.Race = null;
 
             return _animalRepository.AddNew(entity);

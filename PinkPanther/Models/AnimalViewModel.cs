@@ -8,7 +8,6 @@
         public DateOnly BirthDate { get; set; }
         public bool Gender { get; set; } // 0 female, 1 male
         public bool IsVaccinated { get; set; }
-        //public TypeViewModel Type { get; set; }
         public RaceViewModel Race { get; set; }
         public ClientViewModel? Client { get; set; }
         
