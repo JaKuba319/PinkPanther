@@ -12,7 +12,7 @@ namespace PinkPanther.Database
 
         public IEnumerable<Race> GetRaces()
         {
-            return DbSet;
+            return DbSet.Include(race => race.Type);
         }
 
         public override bool Update(Race entity)
@@ -21,6 +21,7 @@ namespace PinkPanther.Database
             if (oldEntity != null)
             {
                 oldEntity.RaceName = entity.RaceName;
+                oldEntity.TypeId = entity.TypeId;
                 return SaveChanges();
             }
             return false;

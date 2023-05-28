@@ -12,7 +12,8 @@ namespace PinkPanther.Database
 
         public IEnumerable<Animal> GetAnimals()
         {
-            return DbSet.Include(animal => animal.Type).Include(animal => animal.Race).Include(animal => animal.Client);
+            //return DbSet.Include(animal => animal.Type).Include(animal => animal.Race).Include(animal => animal.Client);
+            return DbSet.Include(animal => animal.Race).ThenInclude(race => race.Type).Include(animal => animal.Client);
         }
 
         public override bool Update(Animal entity)
@@ -22,7 +23,7 @@ namespace PinkPanther.Database
             {
                 oldEntity.Name = entity.Name;
                 oldEntity.Description = entity.Description;
-                oldEntity.TypeId = entity.TypeId;
+                //oldEntity.TypeId = entity.TypeId;
                 oldEntity.RaceId = entity.RaceId;
                 oldEntity.IsVaccinated = entity.IsVaccinated;
                 oldEntity.Gender = entity.Gender;

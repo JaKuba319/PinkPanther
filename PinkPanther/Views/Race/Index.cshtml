@@ -1,4 +1,4 @@
-﻿@model List<RaceViewModel>
+﻿@model TypeRaceViewModel
 @{
     ViewData["Title"] = "Race Page";
 }
@@ -8,16 +8,24 @@
     <label for="race">Input race:</label>
     <input type="text" id="race" name="race" class="form-control mb-3" />
 
+    <label for="typeId">Input type:</label>
+    <select id="typeId" name="typeId" class="form-select form-select-sm">
+    @foreach (var type in Model.Types)
+    {
+    <option value="@type.Id">@type.TypeName</option>
+    }
+    </select>
+
     <button type="submit" class="btn btn-outline-secondary">Add!</button>
 </form>
 
 
 <h1>Available races:</h1>
 <ul class="list-group">
-    @foreach (var race in Model)
+    @foreach (var race in Model.Races)
     {
         <li class="list-group-item">
-            @race.Id | @race.RaceName
+            @race.Id | @race.Type.TypeName | @race.RaceName
             <a asp-controller="Race" asp-action="Modify" asp-route-id="@race.Id" class="btn btn-sm btn-outline-success">
                 Modify
             </a>

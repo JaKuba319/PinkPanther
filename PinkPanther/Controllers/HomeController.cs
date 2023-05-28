@@ -58,8 +58,8 @@ namespace PinkPanther.Controllers
         {
             // add validation 
             var race = _manager.GetRaceById(raceId);
-            var type = _manager.GetTypeById(typeId);
-            if(race == null || type == null || !DateOnly.TryParse(animalBirthDate, out var date))
+            //var type = _manager.GetTypeById(typeId);
+            if(race == null /*|| type == null*/ || !DateOnly.TryParse(animalBirthDate, out var date))
             {
                 //error
                 return RedirectToAction("Index", "Home");
@@ -70,7 +70,7 @@ namespace PinkPanther.Controllers
                 Name = name,
                 Description = description,
                 Race = race,
-                Type = type,
+                //Type = type,
                 BirthDate = date,
                 Gender = animalGender == "1",
                 IsVaccinated = isVaccinated == "1"
@@ -96,7 +96,7 @@ namespace PinkPanther.Controllers
             var viewModel = new AnimalModifyViewModel()
             {
                 Animal = _mapper.Map(animal),
-                Types = _mapper.Map(_manager.GetTypes()),
+                //Types = _mapper.Map(_manager.GetTypes()),
                 Races = _mapper.Map(_manager.GetRaces()),
             };
 
@@ -104,7 +104,7 @@ namespace PinkPanther.Controllers
         }
 
         //[HttpPut]
-        public IActionResult Change(int id, string name, string gender, string birthDate, int raceId, int typeId, string isVaccinated, string description)
+        public IActionResult Change(int id, string name, string gender, string birthDate, int raceId /*, int typeId*/, string isVaccinated, string description)
         {
             // add validation 
             var oldAnimal = _manager.GetAnimalById(id);
@@ -119,7 +119,7 @@ namespace PinkPanther.Controllers
                 IsVaccinated = isVaccinated == "1",
                 Description = description,
                 Race = _mapper.Map(_manager.GetRaceById(raceId)),
-                Type = _mapper.Map(_manager.GetTypeById(typeId)),
+                //Type = _mapper.Map(_manager.GetTypeById(typeId)),
                 Client = _mapper.Map(oldAnimal.Client)
             };
 

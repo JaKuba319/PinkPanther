@@ -39,7 +39,7 @@ namespace PinkPanther.Core
             var entity = _mapper.Map(animal);
 
             entity.Client = null;
-            entity.Type = null;
+            //entity.Type = null;
             entity.Race = null;
 
             return _animalRepository.AddNew(entity);
@@ -48,13 +48,17 @@ namespace PinkPanther.Core
         public bool AddClient(ClientDto client)
         {
             var entity = _mapper.Map(client);
-            entity.Animals = _mapper.Map(client.Animals).ToList();
+            entity.Animals = _mapper.Map(client.Animals);
             return _clientRepository.AddNew(entity);
         }
 
         public bool AddRace(RaceDto race)
         {
-            return _raceRepository.AddNew(_mapper.Map(race));
+            var entity = _mapper.Map(race);
+
+            entity.Type = null;
+
+            return _raceRepository.AddNew(entity);
         }
 
         public bool AddType(TypeDto type)
@@ -81,7 +85,7 @@ namespace PinkPanther.Core
             if (!string.IsNullOrEmpty(type))
             {
                 animals = animals.Where(animal =>
-                        animal.Type.TypeName == type).ToList();
+                        animal.Race.Type.TypeName == type).ToList();
             }
 
             animals = animals.Where(animal =>

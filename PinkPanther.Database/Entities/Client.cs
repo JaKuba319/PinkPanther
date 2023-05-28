@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PinkPanther.Database
+﻿namespace PinkPanther.Database
 {
     public class Client : BaseEntity
     {
@@ -16,6 +9,6 @@ namespace PinkPanther.Database
         public string PhoneNumber { get; set; }
         public bool Gender { get; set; }
 
-        public virtual List<Animal> Animals { get; set; }
+        public virtual IEnumerable<Animal> Animals { get; set; }
     }
 }

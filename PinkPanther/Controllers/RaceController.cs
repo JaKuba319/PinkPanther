@@ -16,17 +16,25 @@ namespace PinkPanther.Controllers
         }
         public IActionResult Index()
         {
-            var races = _manager.GetRaces();
+            var races = _mapper.Map(_manager.GetRaces());
+            var types = _mapper.Map(_manager.GetTypes());
 
-            return View(_mapper.Map(races));
+            var model = new TypeRaceViewModel() { Races = races, Types = types };
+
+            return View(model);
         }
 
         //[HttpPost]
-        public IActionResult Add(string race)
+        public IActionResult Add(string race, int typeId)
         {
             if (string.IsNullOrEmpty(race)) return RedirectToAction("Index", "Race");
 
-            _manager.AddRace(new RaceDto() { RaceName = race });
+            var type = _manager.GetTypeById(typeId);
+
+            if(type == null) return RedirectToAction("Index", "Race");
+
+            _manager.AddRace(new RaceDto() { RaceName = race, Type = type });
+
             return RedirectToAction("Index", "Race");
         }
 
@@ -50,11 +58,15 @@ namespace PinkPanther.Controllers
         }
 
         //[HttpPut]
-        public IActionResult Change(int id, string race)
+        public IActionResult Change(int id, string race, int typeId)
         {
             if (!string.IsNullOrEmpty(race))
             {
-                var racevm = new RaceViewModel() { Id = id, RaceName = race };
+                var typevm = _mapper.Map(_manager.GetTypeById(typeId));
+
+                if(typevm == null) return RedirectToAction("Index", "Race");
+
+                var racevm = new RaceViewModel() { Id = id, RaceName = race, Type = typevm };
 
                 _manager.UpdateRace(_mapper.Map(racevm));
             }

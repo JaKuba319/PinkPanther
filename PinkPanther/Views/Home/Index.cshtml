@@ -16,19 +16,11 @@
     <label for="name">Input animal's name (if it does not have one then do not input anything):</label>
     <input type="text" id="name" name="name" class="form-control" />
 
-    <label for="type">Input animal's type:</label>
-    <select id="typeId" name="typeId" class="form-select form-select-sm">
-        @foreach (var type in Model.Types)
-        {
-            <option value="@type.Id">@type.TypeName</option>
-        }
-    </select>
-
     <label for="raceId">Input animal's race:</label>
     <select id="raceId" name="raceId" class="form-select form-select-sm">
         @foreach(var race in Model.Races)
         {
-            <option value="@race.Id">@race.RaceName</option>
+            <option value="@race.Id">@race.Type.TypeName -> @race.RaceName</option>
         }
     </select>
 
@@ -127,7 +119,7 @@
                 <td>
                     @animal.Name
                 </td>
-                <td>
+                <td title="@animal.Description">
                     @animal.Description.Truncate(10)
                     @if(animal.Description?.Length > 10)
                     {
@@ -135,7 +127,7 @@
                     }
                 </td>
                 <td>
-                    @animal.Type.TypeName
+                    @animal.Race.Type.TypeName
                 </td>
                 <td>
                     @animal.Race.RaceName

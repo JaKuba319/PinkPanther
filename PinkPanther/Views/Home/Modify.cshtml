@@ -11,19 +11,18 @@
     <label for="name">Input new name:</label>
     <input type="text" id="name" name="name" class="form-control" value="@Model.Animal.Name" />
 
-    <label for="typeId">Input new type:</label>
-    <select id="typeId" name="typeId" class="form-select form-select-sm">
-        @foreach(var type in Model.Types)
-        {
-        <option value="@type.Id">@type.TypeName</option>
-        }
-    </select>
-
     <label for="raceId">Input new race:</label>
     <select id="raceId" name="raceId" class="form-select form-select-sm">
         @foreach (var race in Model.Races)
         {
-            <option value="@race.Id">@race.RaceName</option>
+            if(race.Id == Model.Animal.Race.Id)
+            {
+            <option value="@race.Id" selected>@race.Type.TypeName | @race.RaceName</option>
+            }
+            else
+            {
+            <option value="@race.Id">@race.Type.TypeName | @race.RaceName</option>
+            }
         }
     </select>
 
@@ -46,7 +45,7 @@
         
     </select>
 
-    <label for="isVaccinated">Input new gender:</label>
+    <label for="isVaccinated">Input is vaccinated:</label>
     <select id="isVaccinated" name="isVaccinated" class="form-select form-select-sm mb-3">
         @if (Model.Animal.IsVaccinated)
         {
