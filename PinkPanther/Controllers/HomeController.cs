@@ -54,12 +54,12 @@ namespace PinkPanther.Controllers
         }
 
         //[HttpPost]
-        public IActionResult Add(string name, string description, int raceId, string animalGender, string isVaccinated, string animalBirthDate)
+        public IActionResult Add(string name, string description, int raceId, string gender, string isVaccinated, string birthDate)
         {
             // add validation 
             var race = _manager.GetRaceById(raceId);
             
-            if(race == null || !DateOnly.TryParse(animalBirthDate, out var date))
+            if(race == null || !DateOnly.TryParse(birthDate, out var date))
             {
                 //error
                 return RedirectToAction("Index", "Home");
@@ -71,7 +71,7 @@ namespace PinkPanther.Controllers
                 Description = description,
                 Race = race,
                 BirthDate = date,
-                Gender = animalGender == "1",
+                Gender = gender == "1",
                 IsVaccinated = isVaccinated == "1"
             };
 
@@ -103,9 +103,17 @@ namespace PinkPanther.Controllers
         }
 
         //[HttpPut]
-        public IActionResult Change(int id, string name, string gender, string birthDate, int raceId /*, int typeId*/, string isVaccinated, string description)
+        public IActionResult Change(int id, string name, string gender, string birthDate, int raceId, string isVaccinated, string description)
         {
             // add validation 
+            var race = _manager.GetRaceById(raceId);
+
+            if (race == null || !DateOnly.TryParse(birthDate, out var date))
+            {
+                //error
+                return RedirectToAction("Index", "Home");
+            }
+
             var oldAnimal = _manager.GetAnimalById(id);
             if (oldAnimal == null) return RedirectToAction("Index", "Home");
 

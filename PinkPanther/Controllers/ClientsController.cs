@@ -39,10 +39,10 @@ namespace PinkPanther.Controllers
 
 
         //[HttpPost]
-        public IActionResult Add(string firstName, string lastName, string clientBirthDate, string phoneNumber, string email, string clientGender)
+        public IActionResult Add(string firstName, string lastName, string birthDate, string phoneNumber, string email, string clientGender)
         {
             // add validation 
-            if (firstName == null || lastName == null || !DateOnly.TryParse(clientBirthDate, out var date))
+            if (firstName == null || lastName == null || !DateOnly.TryParse(birthDate, out var date))
             {
                 //error
                 return RedirectToAction("Index", "Clients");
@@ -81,6 +81,12 @@ namespace PinkPanther.Controllers
         public IActionResult Change(int id, string firstName, string lastName, string gender, string birthDate, string phoneNumber, string email)
         {
             // add validation
+            if (firstName == null || lastName == null || !DateOnly.TryParse(birthDate, out var date))
+            {
+                //error
+                return RedirectToAction("Index", "Clients");
+            }
+
             var oldClient = _manager.GetClientById(id);
             if (oldClient == null) return RedirectToAction("Index", "Clients");
 

@@ -52,7 +52,10 @@
     {
         @foreach (var animal in Model.Animals)
         {
-            <li class="list-group-item">@animal.Name</li>
+            <li class="list-group-item">
+                @animal.Name |
+                <a asp-action="ViewSingleAnimal" asp-controller="Home" asp-route-id="@animal.Id">Show</a>
+            </li>
         }
     }
 

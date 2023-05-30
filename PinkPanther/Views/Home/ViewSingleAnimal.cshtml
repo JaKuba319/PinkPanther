@@ -19,7 +19,7 @@
         <li class="list-group-item">
             Adopted by: #@Model.Client.Id | @Model.Client.FirstName @Model.Client.LastName 
             <br/>
-            <a class="btn btn-sm btn-outline-secondary" asp-action="ViewSingleClient" asp-controller="Clients" asp-route-id="@Model.Client.Id">Show</a>
+            <a asp-action="ViewSingleClient" asp-controller="Clients" asp-route-id="@Model.Client.Id">Show</a>
 
         </li>
     }
