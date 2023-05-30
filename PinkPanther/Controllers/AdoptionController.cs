@@ -43,6 +43,7 @@ namespace PinkPanther.Controllers
             return View(adoption);
         }
 
+        [HttpPost]
         public IActionResult AdoptSend(int animalId, int clientId)
         {
             var animalDto = _manager.GetAnimalById(animalId);

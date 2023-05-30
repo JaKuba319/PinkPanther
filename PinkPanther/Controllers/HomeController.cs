@@ -53,7 +53,7 @@ namespace PinkPanther.Controllers
             return View(_mapper.Map(animal));
         }
 
-        //[HttpPost]
+        [HttpPost]
         public IActionResult Add(string name, string description, int raceId, string gender, string isVaccinated, string birthDate)
         {
             // add validation 
@@ -80,7 +80,6 @@ namespace PinkPanther.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        //[HttpDelete]
         public IActionResult Delete(int id)
         {
             _manager.DeleteAnimal(id);
@@ -102,7 +101,6 @@ namespace PinkPanther.Controllers
             return View(viewModel);
         }
 
-        //[HttpPut]
         public IActionResult Change(int id, string name, string gender, string birthDate, int raceId, string isVaccinated, string description)
         {
             // add validation 

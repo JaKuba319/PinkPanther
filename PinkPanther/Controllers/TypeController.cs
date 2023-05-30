@@ -21,7 +21,7 @@ namespace PinkPanther.Controllers
             return View(_mapper.Map(types)); 
         }
 
-        //[HttpPost]
+        [HttpPost]
         public IActionResult Add(string type)
         {
             if(string.IsNullOrEmpty(type)) return RedirectToAction("Index", "Type");
@@ -30,7 +30,6 @@ namespace PinkPanther.Controllers
             return RedirectToAction("Index", "Type");
         }
 
-        //[HttpDelete]
         public IActionResult Delete(int id)
         {
             _manager.DeleteType(id);
@@ -49,7 +48,6 @@ namespace PinkPanther.Controllers
             return RedirectToAction("Index", "Type");
         }
 
-        //[HttpPut]
         public IActionResult Change(int id, string type)
         {
             if (!string.IsNullOrEmpty(type))

@@ -24,7 +24,7 @@ namespace PinkPanther.Controllers
             return View(model);
         }
 
-        //[HttpPost]
+        [HttpPost]
         public IActionResult Add(string race, int typeId)
         {
             if (string.IsNullOrEmpty(race)) return RedirectToAction("Index", "Race");
@@ -38,7 +38,6 @@ namespace PinkPanther.Controllers
             return RedirectToAction("Index", "Race");
         }
 
-        //[HttpDelete]
         public IActionResult Delete(int id)
         {
             _manager.DeleteRace(id);
@@ -57,16 +56,15 @@ namespace PinkPanther.Controllers
             return RedirectToAction("Index", "Race");
         }
 
-        //[HttpPut]
         public IActionResult Change(int id, string race, int typeId)
         {
             if (!string.IsNullOrEmpty(race))
             {
-                var typevm = _mapper.Map(_manager.GetTypeById(typeId));
+                var oldRace = _mapper.Map(_manager.GetRaceById(id));
 
-                if(typevm == null) return RedirectToAction("Index", "Race");
+                if(oldRace == null) return RedirectToAction("Index", "Race");
 
-                var racevm = new RaceViewModel() { Id = id, RaceName = race, Type = typevm };
+                var racevm = new RaceViewModel() { Id = id, RaceName = race, Type = oldRace.Type };
 
                 _manager.UpdateRace(_mapper.Map(racevm));
             }

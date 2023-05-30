@@ -84,7 +84,7 @@ namespace PinkPanther.Core
             if (!string.IsNullOrEmpty(type))
             {
                 animals = animals.Where(animal =>
-                        animal.Race.Type.TypeName == type).ToList();
+                        animal.Race.Type.TypeName == type);
             }
 
             animals = animals.Where(animal =>
@@ -95,20 +95,20 @@ namespace PinkPanther.Core
                     .Where(animal =>
                     {
                         return animal.IsVaccinated == vaccinatedOnly || !vaccinatedOnly;
-                    }).ToList();
+                    });
 
             if (!string.IsNullOrEmpty(filterstring))
             {
+                filterstring = filterstring.ToLower();
                 animals = animals.Where(animal =>
                     {
-                        return animal.Name.ToLower().Contains(filterstring.ToLower());
-                    })
-                    .ToList();
+                        return animal.Name.ToLower().Contains(filterstring);
+                    });
 
-                return _mapper.Map(animals.ToList());
+                return _mapper.Map(animals);
             }
 
-            return _mapper.Map(animals.ToList());
+            return _mapper.Map(animals);
         }
 
         public ClientDto GetClientById(int id)
@@ -123,26 +123,28 @@ namespace PinkPanther.Core
             var clients = _clientRepository.GetClients().Where(client =>
             {
                 return client.Gender == gender;
-            }).ToList();
+            });
 
             if(!string.IsNullOrEmpty(filterstring))
             {
+                filterstring = filterstring.ToLower();
                 clients = clients.Where(client =>
                     client.FirstName.ToLower().Contains(filterstring) ||
-                        client.LastName.ToLower().Contains(filterstring)).ToList();
+                        client.LastName.ToLower().Contains(filterstring));
             }
             return _mapper.Map(clients);
         }
 
         public IEnumerable<ClientDto> GetClients(string filterstring)
         {
-            var clients = _clientRepository.GetClients().ToList();
+            var clients = _clientRepository.GetClients();
 
             if (!string.IsNullOrEmpty(filterstring))
             {
+                filterstring = filterstring.ToLower();
                 clients = clients.Where(client =>
                     client.FirstName.ToLower().Contains(filterstring) ||
-                        client.LastName.ToLower().Contains(filterstring)).ToList();
+                        client.LastName.ToLower().Contains(filterstring));
             }
             return _mapper.Map(clients);
         }
@@ -156,7 +158,7 @@ namespace PinkPanther.Core
 
         public IEnumerable<TypeDto> GetTypes()
         {
-            return _mapper.Map(_typeRepository.GetTypes().ToList());
+            return _mapper.Map(_typeRepository.GetTypes());
         }
 
         public RaceDto GetRaceById(int id)
@@ -168,7 +170,7 @@ namespace PinkPanther.Core
 
         public IEnumerable<RaceDto> GetRaces()
         {
-            return _mapper.Map(_raceRepository.GetRaces().ToList());
+            return _mapper.Map(_raceRepository.GetRaces());
         }
 
         #endregion

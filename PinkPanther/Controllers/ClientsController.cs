@@ -38,7 +38,7 @@ namespace PinkPanther.Controllers
         }
 
 
-        //[HttpPost]
+        [HttpPost]
         public IActionResult Add(string firstName, string lastName, string birthDate, string phoneNumber, string email, string clientGender)
         {
             // add validation 
@@ -63,7 +63,6 @@ namespace PinkPanther.Controllers
             return RedirectToAction("Index", "Clients");
         }
 
-        //[HttpDelete]
         public IActionResult Delete(int id)
         {
             _manager.DeleteClient(id);
@@ -77,7 +76,6 @@ namespace PinkPanther.Controllers
             return View(_mapper.Map(client));
         }
 
-        //[HttpPut]
         public IActionResult Change(int id, string firstName, string lastName, string gender, string birthDate, string phoneNumber, string email)
         {
             // add validation
