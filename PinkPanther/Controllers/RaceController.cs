@@ -25,50 +25,63 @@ namespace PinkPanther.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add(string race, int typeId)
+        public IActionResult Add(RaceViewModel raceViewModel, int typeId)
         {
-            if (string.IsNullOrEmpty(race)) return RedirectToAction("Index", "Race");
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction("Index");
+            }
 
-            var type = _manager.GetTypeById(typeId);
+            var typeDto = _manager.GetTypeById(typeId);
 
-            if(type == null) return RedirectToAction("Index", "Race");
+            if(typeDto == null) return RedirectToAction("Index");
 
-            _manager.AddRace(new RaceDto() { RaceName = race, Type = type });
+            var raceDto = _mapper.Map(raceViewModel);
+            raceDto.Type = typeDto;
 
-            return RedirectToAction("Index", "Race");
+            _manager.AddRace(raceDto);
+
+            return RedirectToAction("Index");
         }
 
         public IActionResult Delete(int id)
         {
             _manager.DeleteRace(id);
 
-            return RedirectToAction("Index", "Race");
+            return RedirectToAction("Index");
         }
 
-        public IActionResult Modify(int id)
+        public IActionResult GoToModify(int id)
         {
-            var races = _manager.GetRaces();
-            var race = races.Where(race => race.Id == id).FirstOrDefault();
-            if (race != null)
+            var race = _manager.GetRaces().Where(race => race.Id == id).FirstOrDefault();
+
+            if (race == null)
             {
-                return View(_mapper.Map(race));
+                return RedirectToAction("Index");
             }
-            return RedirectToAction("Index", "Race");
+
+            var raceViewModel = _mapper.Map(race);
+
+            return View("Modify", raceViewModel);
         }
 
-        public IActionResult Change(int id, string race, int typeId)
+        public IActionResult Modify(RaceViewModel raceViewModel, int typeId)
         {
-            if (!string.IsNullOrEmpty(race))
+            if (!ModelState.IsValid)
             {
-                var oldRace = _mapper.Map(_manager.GetRaceById(id));
-
-                if(oldRace == null) return RedirectToAction("Index", "Race");
-
-                var racevm = new RaceViewModel() { Id = id, RaceName = race, Type = oldRace.Type };
-
-                _manager.UpdateRace(_mapper.Map(racevm));
+                return RedirectToAction("Index");
             }
 
+            var typeDto = _manager.GetTypeById(typeId);
+
+            if (typeDto == null) return RedirectToAction("Index");
+
+
+            var raceDto = _mapper.Map(raceViewModel);
+            raceDto.Type = typeDto;
+
+            _manager.UpdateRace(raceDto);
+            
             return RedirectToAction("Index", "Race");
         }
 

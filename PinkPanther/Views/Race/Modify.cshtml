@@ -13,10 +13,10 @@
     Race: @Model.RaceName
 </h3>
 
-<form asp-action="Change" asp-controller="Race" asp-route-id="@Model.Id">
-    <label for="race">
+<form asp-action="Modify" asp-controller="Race" asp-route-id="@Model.Id" asp-route-typeId="@Model.Type.Id">
+    <label for="raceName">
         Input new race:
     </label>
-    <input type="text" name="race" id="race" value="@Model.RaceName" />
+    <input type="text" name="raceName" id="raceName" value="@Model.RaceName" />
     <button type="submit" class="btn btn-outline-secondary"> Send </button>
 </form>

@@ -8,7 +8,7 @@
     Modify #@Model.Id client's data:
 </h1>
 
-<form asp-controller="Clients" asp-action="Change" asp-route-id="@Model.Id" class="form-group mb-5">
+<form asp-controller="Clients" asp-action="Modify" asp-route-id="@Model.Id" class="form-group mb-5">
     <label for="firstName">Input new first name:</label>
     <input type="text" id="firstName" name="firstName" class="form-control" value="@Model.FirstName"/>
 
@@ -22,13 +22,13 @@
     <select id="gender" name="gender" class="form-select form-select-sm">
         @if (Model.Gender)
         {
-            <option selected value="1">Male</option>
-            <option value="0">Female</option>
+            <option selected value="true">Male</option>
+            <option value="false">Female</option>
         }
         else
         {
-            <option value="1">Male</option>
-            <option selected value="0">Female</option>
+            <option value="true">Male</option>
+            <option selected value="false">Female</option>
         }
     </select>
 
@@ -36,7 +36,7 @@
     <input type="text" id="phoneNumber" name="phoneNumber" class="form-control" value="@Model.PhoneNumber"/>
 
     <label for="email">Input new email:</label>
-    <input type="text" id="email" name="email" class="form-control" value="@Model.Email" />
+    <input type="email" id="email" name="email" class="form-control" value="@Model.Email" />
 
     <button type="submit" class="btn btn-outline-secondary mt-3">Modify client!</button>
 </form>

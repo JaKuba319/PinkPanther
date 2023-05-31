@@ -13,7 +13,7 @@
     <h1>
         Add new animal to database:
     </h1>
-    <label for="name">Input animal's name (if it does not have one then do not input anything):</label>
+    <label for="name">Input animal's name:</label>
     <input type="text" id="name" name="name" class="form-control" />
 
     <label for="raceId">Input animal's race:</label>
@@ -29,14 +29,14 @@
 
     <label for="gender">Input animal's gender:</label>
     <select id="gender" name="gender" class="form-select form-select-sm mb-3">
-        <option value="1">Male</option>
-        <option value="0">Female</option>
+        <option value="true">Male</option>
+        <option value="false">Female</option>
     </select>
 
     <label for="isVaccinated">Input if animal is vaccinated:</label>
     <select id="isVaccinated" name="isVaccinated" class="form-select form-select-sm mb-3">
-        <option value="1">Yes</option>
-        <option value="0">No</option>
+        <option value="true">Yes</option>
+        <option value="false">No</option>
     </select>
 
     <label for="description">Other information (description):</label>
@@ -96,7 +96,7 @@
                 Race
             </th>
             <th>
-                Animal's sex
+                Animal's gender
             </th>
             <th>
                 Date of birth

@@ -33,76 +33,51 @@ namespace PinkPanther.Controllers
         public IActionResult ViewSingleClient(int id)
         {
             var client = _manager.GetClientById(id);
-            if (client == null) return RedirectToAction("Index", "Clients");
+            if (client == null) return RedirectToAction("Index");
             return View(_mapper.Map(client));
         }
 
 
         [HttpPost]
-        public IActionResult Add(string firstName, string lastName, string birthDate, string phoneNumber, string email, string clientGender)
+        public IActionResult Add(ClientViewModel clientViewModel)
         {
-            // add validation 
-            if (firstName == null || lastName == null || !DateOnly.TryParse(birthDate, out var date))
+            if (!ModelState.IsValid)
             {
-                //error
-                return RedirectToAction("Index", "Clients");
+                return RedirectToAction("Index");
             }
 
-            var client = new ClientViewModel()
-            {
-                FirstName = firstName,
-                LastName = lastName,
-                PhoneNumber = phoneNumber,
-                Email = email,
-                Gender = clientGender == "1",
-                BirthDate = date
-            };
+            _manager.AddClient(_mapper.Map(clientViewModel));
 
-            _manager.AddClient(_mapper.Map(client));
-
-            return RedirectToAction("Index", "Clients");
+            return RedirectToAction("Index");
         }
 
         public IActionResult Delete(int id)
         {
             _manager.DeleteClient(id);
-            return RedirectToAction("Index", "Clients");
+            return RedirectToAction("Index");
         }
 
-        public IActionResult Modify(int id)
+        public IActionResult GoToModify(int id)
         {
-            var client = _manager.GetClientById(id);
-            if (client == null) return RedirectToAction("Index", "Clients");
-            return View(_mapper.Map(client));
+            var clientDto = _manager.GetClientById(id);
+            var clientVM = _mapper.Map(clientDto);
+
+            if (clientVM == null) return RedirectToAction("Index");
+            return View("Modify", clientVM);
         }
 
-        public IActionResult Change(int id, string firstName, string lastName, string gender, string birthDate, string phoneNumber, string email)
+        public IActionResult Modify(ClientViewModel clientViewModel)
         {
-            // add validation
-            if (firstName == null || lastName == null || !DateOnly.TryParse(birthDate, out var date))
+            if (!ModelState.IsValid)
             {
-                //error
-                return RedirectToAction("Index", "Clients");
+                return RedirectToAction("Index");
             }
 
-            var oldClient = _manager.GetClientById(id);
-            if (oldClient == null) return RedirectToAction("Index", "Clients");
+            var clientDto = _mapper.Map(clientViewModel);
 
-            var client = new ClientViewModel()
-            {
-                Id = id,
-                FirstName = firstName,
-                LastName = lastName,
-                PhoneNumber = phoneNumber,
-                Email = email,
-                Gender = gender == "1",
-                BirthDate = DateOnly.Parse(birthDate),
-                Animals = _mapper.Map(oldClient.Animals)
-            };
+            _manager.UpdateClient(clientDto);
 
-            _manager.UpdateClient(_mapper.Map(client));
-
-            return RedirectToAction("Index", "Clients");
+            return RedirectToAction("Index");
         }
     }
 }

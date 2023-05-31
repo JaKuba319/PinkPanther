@@ -13,10 +13,10 @@
     @Model.TypeName
 </h3>
 
-<form asp-action="Change" asp-controller="Type" asp-route-id="@Model.Id">
-    <label for="type">
+<form asp-action="Modify" asp-controller="Type" asp-route-id="@Model.Id">
+    <label for="typeName">
         Input new type:
     </label>
-    <input type="text" name="type" id="type" value="@Model.TypeName" />
+    <input type="text" name="typeName" id="typeName" value="@Model.TypeName" />
     <button type="submit" class="btn btn-outline-secondary"> Send </button>
 </form>

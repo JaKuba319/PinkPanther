@@ -3,22 +3,6 @@ using PinkPanther.Database;
 
 namespace PinkPanther.Core
 {
-    public class DateOnlyConverter : IValueConverter<DateTime, DateOnly>
-    {
-        public DateOnly Convert(DateTime sourceMember, ResolutionContext context)
-        {
-            return DateOnly.FromDateTime(sourceMember);
-        }
-    }
-
-    public class DateTimeConverter : IValueConverter<DateOnly, DateTime>
-    {
-        public DateTime Convert(DateOnly sourceMember, ResolutionContext context)
-        {
-            return sourceMember.ToDateTime(TimeOnly.Parse("00:00"));
-        }
-    }
-
     public class DtoMapper
     {
         IMapper _mapper;
@@ -27,10 +11,10 @@ namespace PinkPanther.Core
         {
             _mapper = new MapperConfiguration(opt =>
             {
-                opt.CreateMap<Client, ClientDto>().ForMember(c => c.BirthDate, opt => opt.ConvertUsing(new DateOnlyConverter()));
-                opt.CreateMap<ClientDto, Client>().ForMember(c => c.BirthDate, opt => opt.ConvertUsing(new DateTimeConverter()));
-                opt.CreateMap<Animal, AnimalDto>().ForMember(c => c.BirthDate, opt => opt.ConvertUsing(new DateOnlyConverter()));
-                opt.CreateMap<AnimalDto, Animal>().ForMember(c => c.BirthDate, opt => opt.ConvertUsing(new DateTimeConverter()));
+                opt.CreateMap<Client, ClientDto>();
+                opt.CreateMap<ClientDto, Client>();
+                opt.CreateMap<Animal, AnimalDto>();
+                opt.CreateMap<AnimalDto, Animal>();
                 opt.CreateMap<Database.Type, TypeDto>().ReverseMap();
                 opt.CreateMap<Race, RaceDto>().ReverseMap();
             }).CreateMapper();  

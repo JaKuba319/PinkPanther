@@ -54,28 +54,25 @@ namespace PinkPanther.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add(string name, string description, int raceId, string gender, string isVaccinated, string birthDate)
+        public IActionResult Add(AnimalViewModel animalViewModel, int raceId)
         {
-            // add validation 
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction("Index");
+            }
+
             var race = _manager.GetRaceById(raceId);
             
-            if(race == null || !DateOnly.TryParse(birthDate, out var date))
+            if(race == null)
             {
-                //error
                 return RedirectToAction("Index", "Home");
             }
 
-            var animal = new AnimalDto()
-            { 
-                Name = name,
-                Description = description,
-                Race = race,
-                BirthDate = date,
-                Gender = gender == "1",
-                IsVaccinated = isVaccinated == "1"
-            };
+            var animalDto = _mapper.Map(animalViewModel);
 
-            _manager.AddAnimal(animal);
+            animalDto.Race = race;
+
+            _manager.AddAnimal(animalDto);
             
             return RedirectToAction("Index", "Home");
         }
@@ -86,49 +83,38 @@ namespace PinkPanther.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        public IActionResult Modify(int id)
+        public IActionResult GoToModify(int id)
         {
             var animal = _manager.GetAnimalById(id);
             if (animal == null) return RedirectToAction("Index", "Home");
 
-            var viewModel = new AnimalModifyViewModel()
+            var viewModel = new AnimalRacesViewModel()
             {
                 Animal = _mapper.Map(animal),
-                //Types = _mapper.Map(_manager.GetTypes()),
                 Races = _mapper.Map(_manager.GetRaces()),
             };
 
-            return View(viewModel);
+            return View("Modify", viewModel);
         }
 
-        public IActionResult Change(int id, string name, string gender, string birthDate, int raceId, string isVaccinated, string description)
+        public IActionResult Modify(AnimalViewModel animalRacesViewModel, int raceId)
         {
-            // add validation 
-            var race = _manager.GetRaceById(raceId);
-
-            if (race == null || !DateOnly.TryParse(birthDate, out var date))
+            if (!ModelState.IsValid)
             {
-                //error
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index");
             }
 
-            var oldAnimal = _manager.GetAnimalById(id);
-            if (oldAnimal == null) return RedirectToAction("Index", "Home");
+            var race = _manager.GetRaceById(raceId);
 
-            var animal = new AnimalViewModel()
+            if (race == null)
             {
-                Id = id,
-                BirthDate = DateOnly.Parse(birthDate),
-                Name = name,
-                Gender = gender == "1",
-                IsVaccinated = isVaccinated == "1",
-                Description = description,
-                Race = _mapper.Map(_manager.GetRaceById(raceId)),
-                //Type = _mapper.Map(_manager.GetTypeById(typeId)),
-                Client = _mapper.Map(oldAnimal.Client)
-            };
+                return RedirectToAction("Index", "Home");
+            }
+            var animalDto = _mapper.Map(animalRacesViewModel);
 
-            _manager.UpdateAnimal(_mapper.Map(animal));
+            animalDto.Race = race;
+
+            _manager.UpdateAnimal(animalDto);
 
             return RedirectToAction("Index", "Home");
         }

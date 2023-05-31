@@ -5,8 +5,8 @@
 
 <form class="form-group mb-3" asp-action="Add" asp-controller="Type">
     <h1 class="display-5">Add new type of animal:</h1>
-    <label for="type">Input type:</label>
-    <input type="text" id="type" name="type" class="form-control mb-3" />
+    <label for="typeName">Input type:</label>
+    <input type="text" id="typeName" name="typeName" class="form-control mb-3" />
     
     <button type="submit" class="btn btn-outline-secondary">Add!</button>
 </form>
@@ -18,7 +18,7 @@
 {
         <li class="list-group-item">
             @type.Id | @type.TypeName
-            <a asp-controller="Type" asp-action="Modify" asp-route-id="@type.Id" class="btn btn-sm btn-outline-success">
+            <a asp-controller="Type" asp-action="GoToModify" asp-route-id="@type.Id" class="btn btn-sm btn-outline-success">
                 Modify
             </a>
             <a asp-controller="Type" asp-action="Delete" asp-route-id="@type.Id" class="btn btn-sm btn-outline-danger">

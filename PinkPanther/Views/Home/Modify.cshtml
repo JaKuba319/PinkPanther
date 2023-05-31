@@ -1,4 +1,4 @@
-﻿@model AnimalModifyViewModel
+﻿@model AnimalRacesViewModel
 
 @{
     ViewData["Title"] = "Animal Page";
@@ -7,7 +7,7 @@
     Modify #@Model.Animal.Id @Model.Animal.Name's data
 </h1>
 
-<form asp-controller="Home" asp-action="Change" asp-route-id="@Model.Animal.Id" class="form-group mb-5">
+<form asp-controller="Home" asp-action="Modify" asp-route-id="@Model.Animal.Id" class="form-group mb-5">
     <label for="name">Input new name:</label>
     <input type="text" id="name" name="name" class="form-control" value="@Model.Animal.Name" />
 
@@ -33,13 +33,13 @@
     <select id="gender" name="gender" class="form-select form-select-sm mb-3">
         @if(Model.Animal.Gender)
         {
-            <option selected value="1">Male</option>
-            <option value="0">Female</option>
+            <option selected value="true">Male</option>
+            <option value="false">Female</option>
         }
         else
         {
-            <option value="1">Male</option>
-            <option selected value="0">Female</option>
+            <option value="true">Male</option>
+            <option selected value="false">Female</option>
         }
         
         
@@ -49,23 +49,23 @@
     <select id="isVaccinated" name="isVaccinated" class="form-select form-select-sm mb-3">
         @if (Model.Animal.IsVaccinated)
         {
-            <option selected value="1">Yes</option>
-            <option value="0">No</option>
+            <option selected value="true">Yes</option>
+            <option value="false">No</option>
         }
         else
         {
-            <option value="1">Yes</option>
-            <option selected value="0">No</option>
+            <option value="true">Yes</option>
+            <option selected value="false">No</option>
         }
 
         
     </select>
 
-    <label for="adopted">Change to not adopted: (Not available for now)</label>
+    @*<label for="adopted">Change to not adopted: (Not available for now)</label>
     <select disabled id="adopted" name="adopted" class="form-select form-select-sm mb-3">
         <option value="1">Do not change</option>
         <option value="0">Change</option>
-    </select>
+    </select>*@
 
     <label for="description">Other information (description):</label>
     <input type="text" id="description" name="description" class="form-control" value="@Model.Animal.Description"/>

@@ -1,6 +1,6 @@
 ﻿namespace PinkPanther.Models
 {
-    public class AnimalModifyViewModel
+    public class AnimalRacesViewModel
     {
         public AnimalViewModel Animal { get; set; }
         public IEnumerable<RaceViewModel> Races { get; set; }

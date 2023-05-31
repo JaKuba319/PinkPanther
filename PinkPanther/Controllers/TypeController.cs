@@ -22,12 +22,17 @@ namespace PinkPanther.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add(string type)
+        public IActionResult Add(TypeViewModel typeViewModel)
         {
-            if(string.IsNullOrEmpty(type)) return RedirectToAction("Index", "Type");
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction("Index");
+            }
 
-            _manager.AddType(new TypeDto() { TypeName = type });
-            return RedirectToAction("Index", "Type");
+            var typeDto = _mapper.Map(typeViewModel);
+
+            _manager.AddType(typeDto);
+            return RedirectToAction("Index");
         }
 
         public IActionResult Delete(int id)
@@ -37,27 +42,32 @@ namespace PinkPanther.Controllers
             return RedirectToAction("Index", "Type");
         }
 
-        public IActionResult Modify(int id)
+        public IActionResult GoToModify(int id)
         {
-            var types = _manager.GetTypes();
-            var type = types.Where(type => type.Id == id).FirstOrDefault();
-            if(type != null)
+            var type = _manager.GetTypes().Where(type => type.Id == id).FirstOrDefault();
+
+            if(type == null)
             {
-                return View(_mapper.Map(type));
+                return RedirectToAction("Index");
             }
-            return RedirectToAction("Index", "Type");
+
+            var typeViewModel = _mapper.Map(type);
+
+            return View("Modify", typeViewModel);
         }
 
-        public IActionResult Change(int id, string type)
+        public IActionResult Modify(TypeViewModel typeViewModel)
         {
-            if (!string.IsNullOrEmpty(type))
+            if (!ModelState.IsValid)
             {
-                var typevm = new TypeViewModel() { Id = id, TypeName = type };
-
-                _manager.UpdateType(_mapper.Map(typevm));
-
+                return RedirectToAction("Index");
             }
-            return RedirectToAction("Index", "Type");
+
+            var typeDto = _mapper.Map(typeViewModel);
+
+            _manager.UpdateType(typeDto);
+
+            return RedirectToAction("Index");
         }
 
         
