@@ -9,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<PinkPantherDbContex>(options =>
 {
-    options.UseSqlServer("Server=.;Database=PinkPantherDatabase;Trusted_Connection=True;TrustServerCertificate=True;");
+    options.UseSqlServer(builder.Configuration.GetConnectionString("PinkPantherDatabase"));
     options.EnableSensitiveDataLogging(true);
 });
 
